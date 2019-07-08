@@ -40,11 +40,13 @@ services:
     <<: *django
     image: signmob_production_celeryworker
     command: /start-celeryworker
+    ports: []
 
   celerybeat:
     <<: *django
     image: signmob_production_celerybeat
     command: /start-celerybeat
+    ports: []
 
   flower:
     <<: *django
