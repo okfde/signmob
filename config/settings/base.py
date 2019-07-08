@@ -290,3 +290,7 @@ SOCIALACCOUNT_ADAPTER = "signmob.users.adapters.SocialAccountAdapter"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+LEAFLET_CONFIG = {
+    'FORCE_IMAGE_PATH': True
+}
