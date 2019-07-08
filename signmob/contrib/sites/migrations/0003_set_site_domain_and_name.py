@@ -12,7 +12,7 @@ def update_site_forward(apps, schema_editor):
     Site = apps.get_model("sites", "Site")
     Site.objects.update_or_create(
         id=settings.SITE_ID,
-        defaults={"domain": "app.volksentscheid-transparenz.de", "name": "SignMob"},
+        defaults={"domain": "orga.volksentscheid-transparenz.de", "name": "SignMob"},
     )
 
 
