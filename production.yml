@@ -16,9 +16,10 @@ services:
     links:
       - postgres
       - redis
+    ports:
+      - "127.0.0.1:8050:5000"
     env_file:
-      - ./.envs/.production/.django
-      - ./.envs/.production/.postgres
+      - ./.env
     command: /start
 
   postgres:
