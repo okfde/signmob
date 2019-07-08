@@ -11,8 +11,9 @@ RUN apt-get update \
   # GeoDjango dependencies
   libgdal-dev
 
-RUN addgroup -S django \
-    && adduser -S -G django django
+RUN addgroup --system django \
+    && adduser --system django && \
+    usermod -g django django
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
