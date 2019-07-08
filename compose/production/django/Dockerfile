@@ -1,18 +1,15 @@
 
-FROM python:3.6-alpine
+FROM python:3.7
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apk update \
-  # psycopg2 dependencies
-  && apk add --virtual build-deps gcc python3-dev musl-dev \
-  && apk add postgresql-dev \
-  # Pillow dependencies
-  && apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev \
-  # CFFI dependencies
-  && apk add libffi-dev py-cffi \
+RUN apt-get update \
+  # Translations dependencies
+  && apt-get install -y gettext \
+  # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
+  postgresql-client \
   # GeoDjango dependencies
-  && apk add libgdal-dev
+  libgdal-dev
 
 RUN addgroup -S django \
     && adduser -S -G django django
