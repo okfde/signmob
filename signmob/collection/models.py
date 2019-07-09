@@ -24,6 +24,9 @@ class CollectionGroup(models.Model):
         Calendar, null=True, blank=True, on_delete=models.SET_NULL
     )
 
+    def __str__(self):
+        return self.name
+
 
 class CollectionEventMember(models.Model):
     group = models.ForeignKey("CollectionEvent", on_delete=models.CASCADE)
@@ -50,6 +53,9 @@ class CollectionLocation(models.Model):
     )
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
 
+    def __str__(self):
+        return self.name
+
 
 class CollectionEvent(models.Model):
     name = models.CharField(max_length=255, blank=True)
@@ -61,6 +67,9 @@ class CollectionEvent(models.Model):
         Occurrence, null=True, blank=True, on_delete=models.SET_NULL
     )
     members = models.ManyToManyField(User, through=CollectionEventMember)
+
+    def __str__(self):
+        return self.name
 
 
 class CollectionResult(models.Model):
@@ -82,3 +91,6 @@ class CollectionResult(models.Model):
     event = models.ForeignKey(
         CollectionEvent, null=True, blank=True, on_delete=models.SET_NULL
     )
+
+    def __str__(self):
+        return '{} ({} - {})'.format(self.amount, self.start, self.end)
