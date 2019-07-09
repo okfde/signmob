@@ -26,7 +26,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = "Europe/Berlin"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "de-DE"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -259,7 +259,7 @@ if USE_TZ:
     # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
     CELERY_TIMEZONE = TIME_ZONE
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
-CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", default='')
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-accept_content
@@ -299,7 +299,24 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if DEBUG else 'https'
 # ------------------------------------------------------------------------------
 
 LEAFLET_CONFIG = {
-    'FORCE_IMAGE_PATH': True
+    'FORCE_IMAGE_PATH': True,
+    'DEFAULT_ZOOM': 12,
+    'DEFAULT_CENTER': (52.5, 13.4),
+    'RESET_VIEW': False,
 }
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+FIRST_DAY_OF_WEEK = 1
+
+
+def get_events(request, calendar):
+    if calendar.slug == '-':
+        from schedule.models import Event
+
+        return Event.objects.all().prefetch_related('occurrence_set', 'rule')
+
+    return calendar.event_set.prefetch_related('occurrence_set', 'rule')
+
+
+GET_EVENTS_FUNC = get_events
