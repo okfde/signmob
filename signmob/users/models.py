@@ -29,11 +29,12 @@ class UserManager(BaseUserManager):
             raise ValueError("The given email must be set")
         email = self.normalize_email(email)
 
-        if not username:
-            raise ValueError("The given username must be set")
-        username = self.model.normalize_username(username)
+        username = ''
+        if username:
+            username = self.model.normalize_username(username)
 
         user = self.model(
+            username=username,
             email=email,
             is_staff=is_staff,
             is_active=True,
@@ -53,9 +54,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         _("username"),
         max_length=150,
-        unique=True,
+        blank=True,
         help_text=_(
-            "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+            "150 characters or fewer. Letters, digits and @/./+/-/_ only."
         ),
         validators=[username_validator],
         error_messages={"unique": _("A user with that username already exists.")},
