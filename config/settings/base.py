@@ -62,6 +62,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
+    'django.forms',
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -166,7 +167,9 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-        "DIRS": [str(APPS_DIR.path("templates"))],
+        "DIRS": [
+            str(APPS_DIR.path("templates"))
+        ],
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
             "debug": DEBUG,
@@ -294,3 +297,5 @@ SOCIALACCOUNT_ADAPTER = "signmob.users.adapters.SocialAccountAdapter"
 LEAFLET_CONFIG = {
     'FORCE_IMAGE_PATH': True
 }
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
