@@ -19,6 +19,8 @@ urlpatterns = [
     # path(
     #     "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     # ),
+    # path("", include("signmob.collection.urls", namespace="collection")),
+    path("termine/", include("schedule.urls")),
     path("api/", include(router.urls)),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
