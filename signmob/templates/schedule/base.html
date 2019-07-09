@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static "schedule.css" %}" type="text/css" media="screen">
+{% endblock %}
+
+{% block content %}
+{% block body %}{% endblock %}
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "schedule.js" %}"></script>
+{% endblock %}
