@@ -13,3 +13,10 @@ REDIS_URL=redis://redis:6379/0
 CELERY_FLOWER_USER=debug
 CELERY_FLOWER_PASSWORD=debug
 
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=signmob
+POSTGRES_USER=debug
+POSTGRES_PASSWORD=debug
+
+DATABASE_URL=postgis://debug:debug@postgres:5432/signmob
