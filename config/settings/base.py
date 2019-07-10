@@ -314,7 +314,8 @@ def get_events(request, calendar):
     if calendar.slug == '-':
         from schedule.models import Event
 
-        return Event.objects.all().prefetch_related('occurrence_set', 'rule')
+        return Event.objects.exclude(
+            calendar__slug='-').prefetch_related('occurrence_set', 'rule')
 
     return calendar.event_set.prefetch_related('occurrence_set', 'rule')
 
