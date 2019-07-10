@@ -1,7 +1,7 @@
 from django.contrib.gis.db import models
 from django.utils import timezone
 
-from schedule.models import Calendar, Occurrence
+from schedule.models import Calendar, Occurrence, Event
 
 from signmob.users.models import User
 
@@ -22,6 +22,7 @@ class CollectionGroupMember(models.Model):
 class CollectionGroup(models.Model):
     name = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
+    channel = models.CharField(max_length=255, blank=True)
 
     geo = models.PointField(null=True, blank=True, geography=True)
 
@@ -51,10 +52,13 @@ class CollectionLocation(models.Model):
 
     accumulation = models.BooleanField(default=False)
 
-    calendar = models.ForeignKey(
-        Calendar, null=True, blank=True, on_delete=models.SET_NULL
+    events = models.ManyToManyField(Event)
+    user = models.ForeignKey(
+        User, blank=True, null=True,
+        on_delete=models.SET_NULL
     )
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    needs_check = models.BooleanField(default=False)
+    report = models.TextField(blank=True)
 
     class Meta:
         verbose_name = 'Sammelort'
