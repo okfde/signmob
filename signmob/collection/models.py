@@ -52,7 +52,7 @@ class CollectionLocation(models.Model):
 
     accumulation = models.BooleanField(default=False)
 
-    events = models.ManyToManyField(Event)
+    events = models.ManyToManyField(Event, blank=True)
     user = models.ForeignKey(
         User, blank=True, null=True,
         on_delete=models.SET_NULL

@@ -22,6 +22,7 @@ class CollectionEventAdmin(LeafletGeoAdmin):
 
 class CollectionLocationAdmin(LeafletGeoAdmin):
     display_raw = True
+    raw_id_fields = ('events',)
 
 
 class CollectionGroupMemberInline(admin.StackedInline):
