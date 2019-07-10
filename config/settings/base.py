@@ -29,6 +29,7 @@ TIME_ZONE = "Europe/Berlin"
 LANGUAGE_CODE = "de-DE"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
+SITE_NAME = 'Volksentscheid Transparenz'
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
@@ -190,6 +191,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.request",
+                "signmob.context_processors.site_meta",
             ],
         },
     }
