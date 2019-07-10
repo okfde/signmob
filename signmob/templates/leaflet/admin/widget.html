@@ -4,6 +4,11 @@
 {% block vars %}
     {{ block.super }}
     {% static "leaflet/images/marker-icon.png" as leaflet_img %}
-    {# Horrible hack to get the path, marker-icon.\w{12}.png #}
-    L.Icon.Default.imagePath = "{{ leaflet_img|slice:":-28" }}";
+    
+    {% if debug %}
+        L.Icon.Default.imagePath = "{{ leaflet_img|slice:":-15" }}";
+    {% else %}
+        {# Horrible hack to get the path, marker-icon.\w{12}.png #}
+        L.Icon.Default.imagePath = "{{ leaflet_img|slice:":-28" }}";
+    {% endif %}
 {% endblock vars %}
