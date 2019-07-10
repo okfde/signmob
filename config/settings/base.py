@@ -305,6 +305,13 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 12,
     'DEFAULT_CENTER': (52.5, 13.4),
     'RESET_VIEW': False,
+    'TILES': [
+        (
+            'Carto',
+            '//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png',
+            '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        )
+    ]
 }
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
