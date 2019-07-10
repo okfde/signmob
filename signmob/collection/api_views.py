@@ -1,12 +1,19 @@
-from django.db.models import Value, CharField
-from rest_framework_gis.serializers import GeometryField
+from datetime import timedelta
+
+from django.db.models import Value, CharField, Q
+from django.utils import timezone
+
+from rest_framework_gis.serializers import (
+    GeometryField, GeoFeatureModelListSerializer
+)
 from rest_framework import viewsets, serializers
 from rest_framework.response import Response
 
 from .models import CollectionGroup, CollectionLocation, CollectionEvent
+from .utils import GeoJSONMixin
 
 
-class CollectionSerializer(serializers.Serializer):
+class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
     """
     Combines CollectionGroup
     """
@@ -14,8 +21,11 @@ class CollectionSerializer(serializers.Serializer):
     id = serializers.SerializerMethodField(read_only=True)
     name = serializers.CharField()
     description = serializers.CharField()
-    geo = GeometryField()
+    geometry = GeometryField(source='geo')
     kind = serializers.CharField()
+
+    class Meta:
+        list_serializer_class = GeoFeatureModelListSerializer
 
     def get_id(self, obj):
         return "{kind}_{id}".format(**obj)
