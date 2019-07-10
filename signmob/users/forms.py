@@ -1,30 +1,42 @@
-from django.contrib.auth import get_user_model, forms
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django import forms
+from django.contrib.auth import get_user_model, forms as auth_forms
+
+from allauth.account.forms import SignupForm
 
 User = get_user_model()
 
 
-class UserChangeForm(forms.UserChangeForm):
-    class Meta(forms.UserChangeForm.Meta):
+class UserChangeForm(auth_forms.UserChangeForm):
+    class Meta:
         model = User
+        fields = '__all__'
 
 
-class UserCreationForm(forms.UserCreationForm):
+class UserCreationForm(auth_forms.UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('email', 'name',)
 
-    error_message = forms.UserCreationForm.error_messages.update(
-        {"duplicate_username": _("This username has already been taken.")}
+
+class CustomSignupForm(SignupForm):
+    name = forms.CharField(
+        label='Name',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Dein Name',
+            }
+        )
     )
 
-    class Meta(forms.UserCreationForm.Meta):
-        model = User
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.order_fields(('name', 'email', 'password1', 'password2'))
 
-    def clean_username(self):
-        username = self.cleaned_data["username"]
+    def save(self, request):
 
-        try:
-            User.objects.get(username=username)
-        except User.DoesNotExist:
-            return username
-
-        raise ValidationError(self.error_messages["duplicate_username"])
+        # Ensure you call the parent class's save.
+        # .save() returns a User object.
+        user = super().save(request)
+        user.name = self.cleaned_data['name']
+        user.save()
+        return user

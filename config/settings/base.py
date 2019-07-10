@@ -288,6 +288,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = "signmob.users.adapters.AccountAdapter"
 ACCOUNT_USER_DISPLAY = lambda u: u.name  # noqa
@@ -296,7 +297,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 SOCIALACCOUNT_ADAPTER = "signmob.users.adapters.SocialAccountAdapter"
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if DEBUG else 'https'
-
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 # Your stuff...
 # ------------------------------------------------------------------------------
 
@@ -330,3 +331,8 @@ def get_events(request, calendar):
 
 
 GET_EVENTS_FUNC = get_events
+
+
+ACCOUNT_FORMS = {
+    'signup': 'signmob.users.forms.CustomSignupForm'
+}
