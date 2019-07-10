@@ -16,7 +16,7 @@
         Du bist Teil dieser Sammelgruppe!
       </div>
     {% else %}
-      <form method="post" action="{% url 'collectiongroup-join' pk=object.pk %}">
+      <form method="post" action="{% url 'collection:collectiongroup-join' pk=object.pk %}">
           {% csrf_token %}
           <button class="btn btn-primary" type="submit">Der Sammelgruppe beitreten &raquo;</button>
         </form>
