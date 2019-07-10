@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 from schedule.models import Calendar, Occurrence, Event
@@ -38,6 +39,9 @@ class CollectionGroup(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('collectiongroup-detail', kwargs={'pk': self.pk})
 
 
 class CollectionLocation(models.Model):

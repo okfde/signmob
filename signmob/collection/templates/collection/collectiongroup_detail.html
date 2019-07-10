@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Sammelgruppe „{{ object.name }}“</h2>
+
+  {% if object.description %}
+    <p>{{ object.description }}</p>
+  {% endif %}
+
+  {% if request.user.is_authenticated %}
+    {% if is_member %}
+      <div class="alert alert-success">
+        Du bist Teil dieser Sammelgruppe!
+      </div>
+    {% else %}
+      <form method="post" action="{% url 'collectiongroup-join' pk=object.pk %}">
+          {% csrf_token %}
+          <button class="btn btn-primary" type="submit">Der Sammelgruppe beitreten &raquo;</button>
+        </form>
+    {% endif %}
+  {% else %}
+    <div class="card mt-5">
+      <div class="card-header">
+        <h3>Tritt dieser Sammelgruppe bei</h3>
+      </div>
+      <div class="card-body">
+        <p>
+          Du möchtest beim Sammeln der Unterschriften in dieser Gruppe helfen?
+          Tritt der Gruppe bei und wir informieren dich über anstehende Termine.
+        </p>
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+          {% csrf_token %}
+          {{ signup_form|crispy }}
+          <button class="btn btn-primary" type="submit">Der Sammelgruppe beitreten &raquo;</button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
