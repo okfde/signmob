@@ -1,6 +1,8 @@
 from datetime import timedelta
 
 from django.db.models import Value, CharField, Q
+from django.conf import settings
+from django.urls import reverse
 from django.utils import timezone
 
 from rest_framework_gis.serializers import (
@@ -23,6 +25,7 @@ class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
     description = serializers.CharField()
     geometry = GeometryField(source='geo')
     kind = serializers.CharField()
+    url = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         list_serializer_class = GeoFeatureModelListSerializer
@@ -30,23 +33,36 @@ class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
     def get_id(self, obj):
         return "{kind}_{id}".format(**obj)
 
+    def get_url(self, obj):
+        if obj['kind'] == 'group':
+            return settings.SITE_URL + reverse(
+                'collection:collectiongroup-detail', kwargs={'pk': obj['id']}
+            )
+        return ''
+
 
 class CollectionViewSet(viewsets.ViewSet):
     def list(self, request):
         columns = ("id", "name", "description", "geo", "kind")
         groups = (
             CollectionGroup.objects.all()
-            .annotate(kind=Value("group", output_field=CharField()))
+            .annotate(
+                kind=Value("group", output_field=CharField()),
+            )
             .values(*columns)
         )
         events = (
             CollectionEvent.objects.all()
-            .annotate(kind=Value("event", output_field=CharField()))
+            .annotate(
+                kind=Value("event", output_field=CharField())
+            )
             .values(*columns)
         )
         locations = (
             CollectionLocation.objects.all()
-            .annotate(kind=Value("location", output_field=CharField()))
+            .annotate(
+                kind=Value("location", output_field=CharField())
+            )
             .values(*columns)
         )
         qs = groups.union(events).union(locations)

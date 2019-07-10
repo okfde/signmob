@@ -30,6 +30,7 @@ LANGUAGE_CODE = "de-DE"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 SITE_NAME = 'Volksentscheid Transparenz'
+SITE_URL = 'http://localhost:8000'
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
