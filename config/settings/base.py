@@ -304,7 +304,7 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 # ------------------------------------------------------------------------------
 
 LEAFLET_CONFIG = {
-    'FORCE_IMAGE_PATH': True,
+    'FORCE_IMAGE_PATH': False,
     'DEFAULT_ZOOM': 11,
     'DEFAULT_CENTER': (52.5, 13.4),
     'RESET_VIEW': False,
