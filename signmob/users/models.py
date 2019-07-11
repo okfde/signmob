@@ -1,12 +1,18 @@
+import hashlib
+import hmac
+
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
     BaseUserManager,
 )
+from django.urls import reverse
+from django.conf import settings
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.utils.crypto import constant_time_compare
 
 
 class UserManager(BaseUserManager):
@@ -98,3 +104,23 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.name
+
+    def get_autologin_url(self, url):
+        return settings.SITE_URL + reverse('account-go', kwargs={
+            "user_id": self.id,
+            "secret": self.generate_autologin_secret(),
+            "url": url
+        })
+
+    def check_autologin_secret(self, secret):
+        return constant_time_compare(self.generate_autologin_secret(), secret)
+
+    def generate_autologin_secret(self):
+        to_sign = [str(self.pk)]
+        if self.last_login:
+            to_sign.append(self.last_login.strftime("%Y-%m-%dT%H:%M:%S"))
+        return hmac.new(
+            settings.SECRET_KEY.encode('utf-8'),
+            (".".join(to_sign)).encode('utf-8'),
+            digestmod=hashlib.md5
+        ).hexdigest()

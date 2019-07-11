@@ -1,5 +1,7 @@
-from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.urls import reverse
 from django.views.generic import DetailView, RedirectView, UpdateView
 
@@ -37,3 +39,24 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+
+def link_login(request, user_id, secret, url):
+    if request.user.is_authenticated:
+        if request.user.id != int(user_id):
+            messages.add_message(
+                request, messages.INFO,
+                'Du bist schon eingeloggt!'
+            )
+        return redirect(url)
+
+    user = get_object_or_404(get_user_model(), pk=int(user_id))
+    if user.check_autologin_secret(secret):
+        if not user.is_active:
+            # Confirm user account (link came from email)
+            user.is_active = True
+            user.save()
+        login(request, user)
+        return redirect(url)
+
+    return redirect(url)

@@ -7,6 +7,7 @@ from django.views import defaults as default_views
 from rest_framework.routers import DefaultRouter
 
 from signmob.collection.api_views import CollectionViewSet
+from signmob.users.views import link_login
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -21,6 +22,10 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("signmob.users.urls", namespace="user")),
+    re_path(
+        r'^go/(?P<user_id>\d+)/(?P<secret>\w{32})(?P<url>/.*)$',
+        link_login, name='link_login'
+    ),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
