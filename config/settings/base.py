@@ -304,7 +304,7 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 LEAFLET_CONFIG = {
     'FORCE_IMAGE_PATH': True,
-    'DEFAULT_ZOOM': 12,
+    'DEFAULT_ZOOM': 11,
     'DEFAULT_CENTER': (52.5, 13.4),
     'RESET_VIEW': False,
     'TILES': [
@@ -313,7 +313,8 @@ LEAFLET_CONFIG = {
             '//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png',
             '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         )
-    ]
+    ],
+    'SPATIAL_EXTENT': (12.9, 52.3, 13.8, 52.7)
 }
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
