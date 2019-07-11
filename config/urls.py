@@ -1,8 +1,7 @@
 from django.conf import settings
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
 from rest_framework.routers import DefaultRouter
@@ -15,10 +14,6 @@ router.register(r"collection", CollectionViewSet, basename="collection")
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    # path(
-    #     "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    # ),
     path("", include("signmob.collection.urls", namespace="collection")),
     path("termine/", include("schedule.urls")),
     path("api/", include(router.urls)),
