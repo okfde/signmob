@@ -15,6 +15,7 @@ class CollectionGroupMember(models.Model):
     class Meta:
         verbose_name = 'Ortsgruppenmitglied'
         verbose_name_plural = 'Ortsgruppenmitglieder'
+        unique_together = ['group', 'user']
 
     def __str__(self):
         return self.user.name
@@ -79,9 +80,12 @@ class CollectionEventMember(models.Model):
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
 
+    note = models.TextField(blank=True)
+
     class Meta:
         verbose_name = 'Sammelterminteilnehmer/in'
         verbose_name_plural = 'Sammelterminteilnehmende'
+        ordering = ('start', '-end')
 
     def __str__(self):
         return '{} bei {}'.format(self.user, self.event)
@@ -99,7 +103,7 @@ class CollectionEvent(models.Model):
     )
 
     event_occurence = models.ForeignKey(
-        Occurrence, null=True, blank=True, on_delete=models.SET_NULL
+        Occurrence, null=True, on_delete=models.CASCADE
     )
     members = models.ManyToManyField(User, through=CollectionEventMember)
 
