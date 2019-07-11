@@ -294,6 +294,7 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_ADAPTER = "signmob.users.adapters.AccountAdapter"
 ACCOUNT_USER_DISPLAY = lambda u: u.name  # noqa
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = "signmob.users.adapters.SocialAccountAdapter"
 
