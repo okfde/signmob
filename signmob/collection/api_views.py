@@ -1,9 +1,7 @@
-from datetime import timedelta
-
-from django.db.models import Value, CharField, Q
+from django.db.models import Value, CharField
 from django.conf import settings
 from django.urls import reverse
-from django.utils import timezone
+
 
 from rest_framework_gis.serializers import (
     GeometryField, GeoFeatureModelListSerializer
@@ -13,6 +11,13 @@ from rest_framework.response import Response
 
 from .models import CollectionGroup, CollectionLocation, CollectionEvent
 from .utils import GeoJSONMixin
+
+
+ACTION_URLS = {
+    'group': 'collection:collectiongroup-detail',
+    'location': 'collection:collectionlocation-report',
+    'event': 'collection:collectionevent-join',
+}
 
 
 class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
@@ -34,9 +39,9 @@ class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
         return "{kind}_{id}".format(**obj)
 
     def get_url(self, obj):
-        if obj['kind'] == 'group':
+        if obj['kind'] in ACTION_URLS:
             return settings.SITE_URL + reverse(
-                'collection:collectiongroup-detail', kwargs={'pk': obj['id']}
+                ACTION_URLS[obj['kind']], kwargs={'pk': obj['id']}
             )
         return ''
 
@@ -44,6 +49,8 @@ class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
 class CollectionViewSet(viewsets.ViewSet):
     def list(self, request):
         columns = ("id", "name", "description", "geo", "kind")
+
+        # non_group_events = CollectionEvent.objects.filter(group=None)
         groups = (
             CollectionGroup.objects.all()
             .annotate(
