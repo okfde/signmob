@@ -1,0 +1,38 @@
+{% extends "collection/base.html" %}
+
+{% load i18n %}
+{% load leaflet_tags %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <div class="card mt-5 mb-5">
+      <div class="card-header">
+      <h3>Neuen Sammelort vermerken</h3>
+      </div>
+      <div class="card-body">
+      <p class="lead">
+        Du hast Unterschriftenlisten an einem Ort ausgelegt?
+        Super, bitte lass uns von diesem Ort wissen!
+      </p>
+      <form method="post" action="">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button class="btn btn-primary" type="submit">Sammelort anlegen &raquo;</button>
+      </form>
+      </div>
+  </div>
+{% endblock %}
+
+{% block css %}
+  {{ block.super }}
+  {% leaflet_css plugins="forms" %}
+{% endblock %}
+
+{% block javascript %}
+  {{ block.super }}
+  {% leaflet_js plugins="forms" %}
+  <script>
+    {% include "leaflet/_leaflet_image_path.html" %}
+  </script>
+{% endblock %}

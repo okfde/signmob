@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load leaflet_tags %}
+
+{% block css %}
+  {{ block.super }}
+  {% leaflet_css %}
+{% endblock %}
+
+{% block javascript %}
+  {{ block.super }}
+
+  <script type="text/javascript">
+      function map_init_basic (map, options) {
+        var feature = {{ object.geo.geojson|safe }};
+        var latlng = feature.coordinates
+        latlng.reverse()
+        L.marker(latlng).addTo(map);
+        map.flyTo(latlng, 14)
+      }
+  </script>
+
+  {% leaflet_js %}
+  <script>
+    {% include "leaflet/_leaflet_image_path.html" %}
+  </script>
+{% endblock %}

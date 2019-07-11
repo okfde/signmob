@@ -42,7 +42,7 @@ class CollectionGroup(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('collectiongroup-detail', kwargs={'pk': self.pk})
+        return reverse('collection:collectiongroup-detail', kwargs={'pk': self.pk})
 
 
 class CollectionLocation(models.Model):
@@ -71,6 +71,9 @@ class CollectionLocation(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('collection:collectionlocation-report', kwargs={'pk': self.pk})
 
 
 class CollectionEventMember(models.Model):
@@ -113,6 +116,17 @@ class CollectionEvent(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def start(self):
+        return self.event_occurence.start
+
+    @property
+    def end(self):
+        return self.event_occurence.end
+
+    def get_absolute_url(self):
+        return reverse('collection:collectionevent-join', kwargs={'pk': self.pk})
 
 
 class CollectionResult(models.Model):
