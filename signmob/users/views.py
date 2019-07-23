@@ -11,6 +11,9 @@ User = get_user_model()
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
 
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.pk)
+
 
 user_detail_view = UserDetailView.as_view()
 
