@@ -11,6 +11,7 @@ class CollectionGroupMember(models.Model):
     group = models.ForeignKey("CollectionGroup", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     joined = models.DateTimeField(default=timezone.now)
+    responsible = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Ortsgruppenmitglied'
