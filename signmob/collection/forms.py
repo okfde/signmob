@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django import forms
 from django.utils import timezone
+from django.db.models import Q
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from leaflet.forms.fields import PointField
@@ -9,25 +10,19 @@ from leaflet.forms.fields import PointField
 from signmob.users.forms import CustomSignupForm
 
 from .models import (
-    CollectionGroup, CollectionGroupMember, CollectionLocation,
+    CollectionGroupMember, CollectionLocation,
     CollectionEventMember
 )
 from .signals import group_joined, location_created, location_reported
 
 
 class GroupSignupForm(CustomSignupForm):
-    group = forms.ModelChoiceField(
-        queryset=CollectionGroup.objects.all(),
-        widget=forms.HiddenInput
-    )
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         del self.fields['password1']
 
-    def save(self, request):
+    def save(self, request, group):
         user = super().save(request)
-        group = self.cleaned_data['group']
         CollectionGroupMember.objects.create(
             group=group,
             user=user
@@ -68,10 +63,15 @@ class CollectionLocationForm(forms.ModelForm):
             'genau auf den Ort der Unterschriftenliste.'
         )
     )
+    email = forms.EmailField(
+        label='Deine E-Mail-Adresse',
+        help_text='Optional. Falls wir Rückfragen zu diesem Ort haben, können wir dich kontaktieren.',
+        required=False
+    )
 
     class Meta:
         model = CollectionLocation
-        fields = ('name', 'geo', 'address', 'description',)
+        fields = ('name', 'geo', 'address', 'description', 'email',)
 
     def save(self, request):
         obj = super().save(commit=False)

@@ -48,16 +48,39 @@ class CollectionGroupDetailView(DetailView):
         return context
 
 
-@login_required
 def join_group(request, pk):
     group = get_object_or_404(CollectionGroup, pk=pk)
-    if not CollectionGroupMember.objects.filter(
-            group=group, user=request.user).exists():
-        CollectionGroupMember.objects.create(
-            group=group,
-            user=request.user
+
+    if request.user.is_authenticated:
+        if not CollectionGroupMember.objects.filter(
+                group=group, user=request.user).exists():
+            CollectionGroupMember.objects.create(
+                group=group,
+                user=request.user
+            )
+        return redirect(group)
+
+    form = GroupSignupForm(request.POST)
+    if form.is_valid():
+        user = form.save(request, group)
+        messages.add_message(
+            request, messages.SUCCESS,
+            'Vielen Dank! Bitte bestätige Deine E-Mail-Adresse.'
         )
-    return redirect(group)
+        try:
+            return complete_signup(
+                request, user,
+                'optional',
+                group.get_absolute_url())
+        except ImmediateHttpResponse as e:
+            return e.response
+        return redirect(group)
+
+    return render(
+        request,
+        'collection/collectiongroup_detail.html',
+        {'signup_form': form}
+    )
 
 
 class CollectionLocationCreateView(CreateView):
@@ -103,7 +126,7 @@ class CollectionLocationReportView(FormView):
         return reverse('collection:home')
 
 
-class CollectionEventJoinView(LoginRequiredMixin, FormView):
+class CollectionEventJoinView(FormView):
     template_name = 'collection/collectionevent_join.html'
     form_class = CollectionEventJoinForm
 
