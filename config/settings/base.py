@@ -287,9 +287,10 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[Volksentscheid] '
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = "signmob.users.adapters.AccountAdapter"
 ACCOUNT_USER_DISPLAY = lambda u: u.name  # noqa
@@ -302,6 +303,9 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if DEBUG else 'https'
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+SESSION_COOKIE_AGE = 15724800  # six months
+
 
 LEAFLET_CONFIG = {
     'FORCE_IMAGE_PATH': False,
