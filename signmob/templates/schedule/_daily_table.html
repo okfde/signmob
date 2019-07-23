@@ -5,16 +5,17 @@
     <td class="col-md-1">
       <span class="time">{{ slot.start|time:"G:i" }}</span>
       {% if addable %}
-      {% create_event_url calendar slot.start %}
+        {% create_event_url calendar slot.start %}
       {% endif %}
     </td>
     <td class="col-md-4">
       {% for occ in slot.occurrences %}
-      <button type="button"  class="btn {% if occ.cancelled %} btn-danger {%else%} btn-primary {% endif %}" data-toggle="modal" data-target="#{% hash_occurrence occ %}" {% if occ.event.color_event %} style="background-color: {{occ.event.color_event}};border-color:{{occ.event.color_event}}" {% endif %}>
-                  {% options occ %}
-                  {% title occ %}
-            </button>
-      {% include 'schedule/_detail.html' with occurrence=occ %}
+      {% comment %} <button type="button"  class="btn {% if occ.cancelled %} btn-danger {%else%} btn-primary {% endif %}" data-toggle="modal" data-target="#{% hash_occurrence occ %}" {% if occ.event.color_event %} style="background-color: {{occ.event.color_event}};border-color:{{occ.event.color_event}}" {% endif %}> {% endcomment %}
+        {{ occ.id }}
+        {% options occ %}
+        {% title occ %}
+      {% comment %} </button> {% endcomment %}
+      {% comment %} {% include 'schedule/_detail.html' with occurrence=occ %} {% endcomment %}
       {% endfor %}
     </td>
   </tr>
