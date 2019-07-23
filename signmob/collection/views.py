@@ -2,19 +2,23 @@ from django.urls import reverse
 from django.views.generic import (
     DetailView, CreateView, FormView, TemplateView
 )
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
+from allauth.account.utils import complete_signup
+from allauth.exceptions import ImmediateHttpResponse
 
 from .models import (
     CollectionGroup, CollectionGroupMember, CollectionEvent,
-    CollectionLocation
+    CollectionLocation, CollectionEventMember
 )
 from .forms import (
     GroupSignupForm, CollectionLocationForm, CollectionLocationReportForm,
     CollectionEventJoinForm
 )
+from .utils import get_period
 
 
 class HomeView(TemplateView):
@@ -128,3 +132,15 @@ class CollectionEventJoinView(LoginRequiredMixin, FormView):
             'Vielen Dank, dass du dabei bist!'
         )
         return redirect(event)
+
+
+@login_required
+def cancel_event_membership(request, pk):
+    event_member = get_object_or_404(
+        CollectionEventMember, pk=pk, user=request.user
+    )
+
+    response = redirect(event_member.event)
+    event_member.delete()
+
+    return response

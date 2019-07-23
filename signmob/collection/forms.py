@@ -162,11 +162,26 @@ class CollectionEventJoinForm(forms.Form):
         start_date = datetime.combine(date, self.cleaned_data['start'])
         end_date = datetime.combine(date, self.cleaned_data['end'])
         current_tz = timezone.get_current_timezone()
+        start_date = current_tz.localize(start_date)
+        end_date = current_tz.localize(end_date)
+
+        overlapping_events = CollectionEventMember.objects.filter(
+            event=self.event,
+            user=user,
+        ).filter(
+            (Q(start__gte=start_date) & Q(end__lte=start_date)) |
+            (Q(start__lte=end_date) & Q(end__gte=end_date))
+        )
+        for oe in overlapping_events:
+            start_date = min(start_date, oe.start)
+            end_date = max(end_date, oe.end)
+        overlapping_events.delete()
+
         event_member = CollectionEventMember.objects.create(
             event=self.event,
             user=user,
-            start=current_tz.localize(start_date),
-            end=current_tz.localize(end_date),
+            start=start_date,
+            end=end_date,
             note=self.cleaned_data['note'],
         )
         return event_member

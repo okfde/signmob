@@ -4,7 +4,7 @@ from .views import (
     HomeView,
     CollectionGroupDetailView, join_group,
     CollectionLocationCreateView, CollectionLocationReportView,
-    CollectionEventJoinView
+    CollectionEventJoinView, cancel_event_membership
 )
 
 
@@ -38,5 +38,10 @@ urlpatterns = [
         'sammeltermin/<int:pk>/',
         CollectionEventJoinView.as_view(),
         name='collectionevent-join'
+    ),
+    path(
+        'sammeltermin/absagen/<int:pk>/',
+        cancel_event_membership,
+        name='collectionevent-cancel'
     ),
 ]
