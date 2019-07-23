@@ -41,9 +41,14 @@ class CollectionGroupDetailView(DetailView):
 
             context['is_member'] = is_member
         else:
-            context['signup_form'] = GroupSignupForm(initial={
-                'group': self.object
-            })
+            context['signup_form'] = GroupSignupForm()
+
+        context['members'] = self.object.collectiongroupmember_set.all()
+        context['member_count'] = context['members'].count()
+
+        if self.object.calendar:
+            context['date'] = timezone.now()
+            context['period'] = get_period(self.object.calendar)
 
         return context
 

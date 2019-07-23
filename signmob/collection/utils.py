@@ -1,5 +1,10 @@
 from collections import OrderedDict
 
+from django.conf import settings
+from django.utils import timezone
+
+from schedule.periods import Month
+
 
 class GeoJSONMixin(object):
     def to_representation(self, instance):
@@ -57,3 +62,10 @@ class GeoJSONMixin(object):
             properties[field.field_name] = representation
 
         return properties
+
+
+def get_period(calendar, period_class=Month):
+        event_list = settings.GET_EVENTS_FUNC(None, calendar)
+        date = timezone.now()
+        local_timezone = timezone.get_current_timezone()
+        return period_class(event_list, date, tzinfo=local_timezone)
