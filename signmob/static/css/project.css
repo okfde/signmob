@@ -8462,6 +8462,10 @@ caption {
 td.has-occurence a, td.has-occurence a:hover {
   color: #fff; }
 
+.week-links a {
+  font-size: 14.4px;
+  font-size: 0.9rem; }
+
 .glyphicon.glyphicon-circle-arrow-right::after {
   content: "->"; }
 
