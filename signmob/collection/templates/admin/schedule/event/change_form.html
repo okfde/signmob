@@ -1,0 +1,17 @@
+{% extends "admin/change_form.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  {{ block.super }}
+  {% if original.pk %}
+    <div>
+      <form method="post" action="{% url 'admin:collection-collectionevent-create_from_event' event_id=original.pk %}">
+      {% csrf_token %}
+        <input type="date" name="date" value=""/>
+        
+        <input type="submit" value="Neuen Sammeltermin anlegen"/>
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

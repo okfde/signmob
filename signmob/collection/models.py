@@ -1,6 +1,7 @@
 from django.contrib.gis.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.formats import date_format
 
 from schedule.models import Calendar, Occurrence, Event
 
@@ -107,6 +108,7 @@ class CollectionEvent(models.Model):
         on_delete=models.SET_NULL
     )
 
+    # FIXME: spelling
     event_occurence = models.ForeignKey(
         Occurrence, null=True, on_delete=models.CASCADE
     )
@@ -126,6 +128,18 @@ class CollectionEvent(models.Model):
     @property
     def end(self):
         return self.event_occurence.end
+
+    @property
+    def start_time(self):
+        tz = timezone.get_current_timezone()
+        local_time = self.event_occurence.start.astimezone(tz)
+        return date_format(local_time, "SHORT_DATETIME_FORMAT")
+
+    @property
+    def end_time(self):
+        tz = timezone.get_current_timezone()
+        local_time = self.event_occurence.end.astimezone(tz)
+        return date_format(local_time, "SHORT_DATETIME_FORMAT")
 
     def get_absolute_url(self):
         return reverse('collection:collectionevent-join', kwargs={'pk': self.pk})

@@ -3,7 +3,7 @@ from collections import OrderedDict
 from django.conf import settings
 from django.utils import timezone
 
-from schedule.periods import Month
+from schedule.periods import Month, Day
 
 
 class GeoJSONMixin(object):
@@ -65,7 +65,15 @@ class GeoJSONMixin(object):
 
 
 def get_period(calendar, period_class=Month):
-        event_list = settings.GET_EVENTS_FUNC(None, calendar)
-        date = timezone.now()
-        local_timezone = timezone.get_current_timezone()
-        return period_class(event_list, date, tzinfo=local_timezone)
+    event_list = settings.GET_EVENTS_FUNC(None, calendar)
+    date = timezone.now()
+    local_timezone = timezone.get_current_timezone()
+    return period_class(event_list, date, tzinfo=local_timezone)
+
+
+def get_occurrence(event, date):
+    period = Day([event], date=date)
+    occurences = period.get_occurrences()
+    if not occurences or len(occurences) > 1:
+        return None
+    return occurences[0]

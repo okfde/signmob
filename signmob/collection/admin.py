@@ -1,5 +1,12 @@
+from datetime import datetime
+
 from django.contrib import admin
+from django.shortcuts import redirect
+from django.urls import path
 from leaflet.admin import LeafletGeoAdmin
+
+from schedule.admin import EventAdmin
+from schedule.models import Event, Occurrence
 
 from .models import (
     CollectionGroup,
@@ -9,6 +16,7 @@ from .models import (
     CollectionEventMember,
     CollectionGroupMember,
 )
+from .utils import get_occurrence
 
 
 class CollectionEventMemberInline(admin.StackedInline):
@@ -16,9 +24,63 @@ class CollectionEventMemberInline(admin.StackedInline):
 
 
 class CollectionEventAdmin(LeafletGeoAdmin):
-    display_raw = True
+    display_raw = False
     inlines = [CollectionEventMemberInline]
     save_on_top = True
+    readonly_fields = ('start_time', 'end_time', 'group')
+    fieldsets = (
+        (None, {
+            'fields': (
+                'name', 'description', 'start_time', 'end_time',
+                'event_occurence', 'geo'
+            )
+        }),
+        ('Gruppe', {
+            'fields': ('group',),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path(
+                'from-event/<int:event_id>/',
+                self.admin_site.admin_view(self.create_from_event),
+                name='collection-collectionevent-create_from_event'
+            ),
+        ]
+        return my_urls + urls
+
+    def create_from_event(self, request, event_id):
+        event = Event.objects.get(pk=event_id)
+        date = datetime(*[int(x) for x in request.POST['date'].split('-')])
+        occurrence = get_occurrence(event, date)
+        if occurrence is None:
+            self.message_user(request, 'Konnte an diesem Datum keinen geplanten Termin finden!')
+            return redirect('admin:schedule_event_change', event_id)
+        occurrence.save()
+
+        try:
+            group = CollectionGroup.objects.get(
+                calendar=event.calendar
+            )
+        except CollectionGroup.DoesNotExist:
+            group = None
+
+        try:
+            c_event = CollectionEvent.objects.filter(
+                event_occurence=occurrence
+            ).get()
+        except CollectionEvent.DoesNotExist:
+            c_event = CollectionEvent.objects.create(
+                name=event.title,
+                description=event.description,
+                geo=group.geo if group is not None else None,
+                group=group,
+                event_occurence=occurrence
+            )
+        return redirect('admin:collection_collectionevent_change', c_event.id)
 
 
 class CollectionLocationAdmin(LeafletGeoAdmin):
@@ -55,3 +117,19 @@ admin.site.register(CollectionLocation, CollectionLocationAdmin)
 admin.site.register(CollectionResult, CollectionResultAdmin)
 admin.site.register(CollectionGroupMember, CollectionGroupMemberAdmin)
 admin.site.register(CollectionEventMember, CollectionEventMemberAdmin)
+
+
+class CustomEventAdmin(EventAdmin):
+    list_filter = ('calendar',) + EventAdmin.list_filter
+
+
+admin.site.unregister(Event)
+admin.site.register(Event, CustomEventAdmin)
+
+
+class CustomOccurrenceAdmin(admin.ModelAdmin):
+    readonly_fields = ('original_start', 'original_end')
+
+
+admin.site.unregister(Occurrence)
+admin.site.register(Occurrence, CustomOccurrenceAdmin)
