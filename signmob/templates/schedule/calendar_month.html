@@ -5,22 +5,19 @@
 {% include "schedule/_dialogs.html" %}
 <div class="">
   <h2 class="calendarname">{{ calendar.name }}</h2>
-  {% prevnext "month_calendar" calendar period "F Y"%}
-  <div class="now row-centered">
+
+  <div class="text-center">
+    {% prevnext "month_calendar" calendar period "F Y"%}
+  </div>
+
+  <div class="now">
     <a href="{% url "month_calendar" calendar.slug %}">
       {% trans "This month" %}
     </a>
   </div>
-  <div class="center span7">
+  <div class="">
     {% month_table calendar period "regular" %}
   </div>
 </div>
-<div class="">
-  <a href="{% url "tri_month_calendar" calendar.slug %}{% querystring_for_date period.start 2 %}">
-    {% trans "Three Month Calendar" %}
-  </a>
-  <a href="{% url "year_calendar" calendar.slug %}{% querystring_for_date period.start 1 %}">
-    {% trans "Full Year Calendar" %}
-  </a>
-</div>
+
 {% endblock %}

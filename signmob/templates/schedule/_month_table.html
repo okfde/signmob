@@ -3,11 +3,15 @@
 
 <div class="table-responsive">
   <table class="table table-striped">
-    <caption>{% trans month.name %} {{ month.year }}</caption>
+    <caption>
+      <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date month.start 2 %}">
+        {% trans month.name %} {{ month.year }}
+      </a>
+    </caption>
     {% if day_names %}
     <thead>
       <th class="text-muted">
-      Woche
+      <small>W</small>
       </th>
       {% for day_name in day_names %}
         <th>{{ day_name }}</th>

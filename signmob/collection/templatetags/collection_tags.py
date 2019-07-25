@@ -1,6 +1,7 @@
 from django import template
 
 from ..forms import GroupSignupForm
+from ..models import CollectionGroup, CollectionEvent
 
 register = template.Library()
 
@@ -33,3 +34,25 @@ def get_gantt_for_member(event, member, user):
 @register.simple_tag
 def get_signup_form():
     return GroupSignupForm()
+
+
+@register.inclusion_tag('collection/_event_schedule.html')
+def show_related_collection(event):
+    calendar = event.calendar
+
+    try:
+        group = CollectionGroup.objects.get(calendar=calendar)
+    except CollectionGroup.DoesNotExist:
+        group = None
+
+    try:
+        event = CollectionEvent.objects.get(
+            event_occurence__event=event
+        )
+    except CollectionEvent.DoesNotExist:
+        event = None
+
+    return {
+        'event': event,
+        'group': group
+    }
