@@ -8,7 +8,9 @@
     <div>
       <form method="post" action="{% url 'admin:collection-collectionevent-create_from_event' event_id=original.pk %}">
       {% csrf_token %}
-        <input type="date" name="date" value=""/>
+        {% if original.rule %}
+          <input type="date" name="date" value=""/>
+        {% endif %}
         
         <input type="submit" value="Neuen Sammeltermin anlegen"/>
       </form>

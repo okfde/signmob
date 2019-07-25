@@ -54,7 +54,12 @@ class CollectionEventAdmin(LeafletGeoAdmin):
 
     def create_from_event(self, request, event_id):
         event = Event.objects.get(pk=event_id)
-        date = datetime(*[int(x) for x in request.POST['date'].split('-')])
+
+        if event.rule:
+            date = datetime(*[int(x) for x in request.POST['date'].split('-')])
+        else:
+            date = event.start
+
         occurrence = get_occurrence(event, date)
         if occurrence is None:
             self.message_user(request, 'Konnte an diesem Datum keinen geplanten Termin finden!')
