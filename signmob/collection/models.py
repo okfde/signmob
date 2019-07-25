@@ -15,8 +15,8 @@ class CollectionGroupMember(models.Model):
     responsible = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = 'Ortsgruppenmitglied'
-        verbose_name_plural = 'Ortsgruppenmitglieder'
+        verbose_name = 'Teammitglied'
+        verbose_name_plural = 'Teammitglieder'
         unique_together = ['group', 'user']
 
     def __str__(self):
@@ -37,11 +37,11 @@ class CollectionGroup(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Ortsgruppe'
-        verbose_name_plural = 'Ortsgruppen'
+        verbose_name = 'Team'
+        verbose_name_plural = 'Teams'
 
     def __str__(self):
-        return self.name
+        return 'Team {}'.format(self.name)
 
     def get_absolute_url(self):
         return reverse('collection:collectiongroup-detail', kwargs={'pk': self.pk})
