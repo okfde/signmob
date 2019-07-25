@@ -340,6 +340,14 @@ def get_events(request, calendar):
 GET_EVENTS_FUNC = get_events
 
 
+def nope(ob, user):
+    return False
+
+
+CHECK_EVENT_PERM_FUNC = nope
+CHECK_CALENDAR_PERM_FUNC = nope
+
+
 ACCOUNT_FORMS = {
     'signup': 'signmob.users.forms.CustomSignupForm'
 }
