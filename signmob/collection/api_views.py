@@ -33,7 +33,7 @@ class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
     id = serializers.SerializerMethodField(read_only=True)
     name = serializers.CharField()
     description = serializers.CharField()
-    details = serializers.SerializerMethodField(read_only=True)
+    details = serializers.DictField()
     geometry = GeometryField(source='geo')
     kind = serializers.CharField()
     url = serializers.SerializerMethodField(read_only=True)
@@ -51,25 +51,32 @@ class CollectionSerializer(GeoJSONMixin, serializers.Serializer):
             )
         return ''
 
-    def get_details(self, obj):
-        if obj['kind'] == 'location':
-            return {
-                'address': obj['_address']
-            }
-        if obj['kind'] == 'event':
-            tz = timezone.get_current_timezone()
-            start = obj['_start'].astimezone(tz)
-            start = date_format(start, "DATETIME_FORMAT")
-            end = obj['_end'].astimezone(tz)
-            end = date_format(end, "TIME_FORMAT")
-            return {
-                'group': obj['_group'],
-                'start': obj['_start'],
-                'end': obj['_end'],
-                'start_format': start,
-                'end_format': end,
-            }
-        return {}
+
+def get_details(obj):
+    if obj['kind'] == 'location':
+        return {
+            'address': obj['_address']
+        }
+    if obj['kind'] == 'event':
+        tz = timezone.get_current_timezone()
+        start = obj['_start'].astimezone(tz)
+        start = date_format(start, "DATETIME_FORMAT")
+        end = obj['_end'].astimezone(tz)
+        end = date_format(end, "TIME_FORMAT")
+        return {
+            'group': obj['_group'],
+            'start': obj['_start'],
+            'end': obj['_end'],
+            'start_format': start,
+            'end_format': end,
+        }
+    return {}
+
+
+def add_details(data):
+    for d in data:
+        d['details'] = get_details(d)
+        yield d
 
 
 class CollectionViewSet(viewsets.ViewSet):
@@ -127,6 +134,7 @@ class CollectionViewSet(viewsets.ViewSet):
         )
         qs = groups.union(events).union(locations)
 
-        qs = [dict(zip(columns, d)) for d in qs]
+        qs = list(add_details(dict(zip(columns, d)) for d in qs))
+
         serializer = CollectionSerializer(qs, many=True)
         return Response(serializer.data)
