@@ -1,0 +1,9 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}Hallo {{ user_display }},
+
+Bitte bestätige deine E-Mail-Adresse beim Volksentscheid Transparenz, indem auf den folgende Link klickst:
+
+{{ activate_url }}
+
+Viele Grüße vom
+Volksentscheid Transparenz
+{% endautoescape %}

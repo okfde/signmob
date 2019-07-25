@@ -11,6 +11,16 @@
     {{ object.name }}
   </h2>
 
+  {% if object.group %}
+    <div class="float-right">
+      <a href="{{ object.group.get_absolute_url }}">
+        <span class="badge badge-primary">
+          {{ object.group.name }}
+        </span>
+      </a>
+    </div>
+  {% endif %}
+
   <div class="row mt-3 mb-3">
     <div class="col-md-6">
       <p>
