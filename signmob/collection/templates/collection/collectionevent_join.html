@@ -34,7 +34,7 @@
     </div>
     <div class="w-100 border">
       {% for gantt in gant_members %}
-        <div style="{{ gantt.style }}" class="text-white bg-secondary p-2">
+        <div style="{{ gantt.style }}" class="text-white {% if gantt.member.user == request.user %}bg-warning{% else %}bg-secondary{% endif %} p-2">
           <p>
             {{ gantt.member.user.name }}: {{ gantt.member.start|date:"TIME_FORMAT" }} - {{ gantt.member.end|date:"TIME_FORMAT" }}&nbsp;Uhr
           </p>
@@ -52,13 +52,13 @@
     </div>
   {% endif %}
 
-  {% if object.group %}
-    <div class="card mt-5 mb-5" id="report">
-      <div class="card-header">
-        <h3>Selbst teilnehmen</h3>
-      </div>
-      <div class="card-body">
-        {% if request.user.is_authenticated %}
+  {% if request.user.is_authenticated %}
+    {% if not object.group or is_group_member %}
+      <div class="card mt-5 mb-5">
+        <div class="card-header">
+          <h3>Selbst teilnehmen</h3>
+        </div>
+        <div class="card-body">
           <p class="lead">
             Bitte sag uns, zu welchen Zeiten du am {{ object.start.date|date:"SHORT_DATE_FORMAT" }} teilnehmen kannst.
           </p>
@@ -67,12 +67,13 @@
             {{ form|crispy }}
             <button class="btn btn-primary" type="submit">Teilnehmen &raquo;</button>
           </form>
-        {% else %}
-          <a class="btn btn-primary" href="{{ object.group.get_absolute_url }}">
-            Der Sammelgruppe beitreten
-          </a>
-        {% endif %}
-    </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+  
+  {% if object.group and not is_group_member %}
+    {% include "collection/_collectiongroup_join.html" with object=object.group %}
   {% endif %}
 
 {% endblock %}

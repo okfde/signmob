@@ -1,5 +1,6 @@
 from django import template
 
+from ..forms import GroupSignupForm
 
 register = template.Library()
 
@@ -27,3 +28,8 @@ def get_gantt_for_member(event, member, user):
         'member': member,
         'can_delete': member.user_id == user.id,
     }
+
+
+@register.simple_tag
+def get_signup_form():
+    return GroupSignupForm()

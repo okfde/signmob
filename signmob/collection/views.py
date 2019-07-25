@@ -139,6 +139,10 @@ class CollectionEventJoinView(FormView):
         context = super().get_context_data(**kwargs)
         context['object'] = self.get_object()
         context['members'] = context['object'].collectioneventmember_set.all()
+        if context['object'].group:
+            context['is_group_member'] = bool(self.request.user in (
+                m.user for m in context['object'].group.collectiongroupmember_set.all()
+            ))
         return context
 
     def get_form_kwargs(self):
