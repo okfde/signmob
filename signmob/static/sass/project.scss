@@ -48,3 +48,31 @@ $red: #b94a48;
   width: 100%;
   height: 300px;
 }
+
+/* Calendar */
+
+caption {
+  caption-side: top;
+  text-align: center;
+}
+
+td.has-occurence {
+  @extend .bg-primary;
+  a, a:hover {
+    color: #fff;
+  }
+}
+
+.week-links {
+  a {
+    @extend .text-muted;
+  }
+}
+
+.glyphicon.glyphicon-circle-arrow-right::after {
+  content: "->"
+}
+
+.glyphicon.glyphicon-circle-arrow-left::after {
+  content: "<-"
+}

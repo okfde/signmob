@@ -5585,7 +5585,7 @@ a.close.disabled {
 .align-text-top {
   vertical-align: text-top !important; }
 
-.bg-primary {
+.bg-primary, td.has-occurence {
   background-color: #007bff !important; }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -8345,7 +8345,7 @@ a.text-dark:hover, a.text-dark:focus {
 .text-body {
   color: #212529 !important; }
 
-.text-muted {
+.text-muted, .week-links a {
   color: #6c757d !important; }
 
 .text-black-50 {
@@ -8453,3 +8453,17 @@ a.text-dark:hover, a.text-dark:focus {
 #smallmap {
   width: 100%;
   height: 300px; }
+
+/* Calendar */
+caption {
+  caption-side: top;
+  text-align: center; }
+
+td.has-occurence a, td.has-occurence a:hover {
+  color: #fff; }
+
+.glyphicon.glyphicon-circle-arrow-right::after {
+  content: "->"; }
+
+.glyphicon.glyphicon-circle-arrow-left::after {
+  content: "<-"; }

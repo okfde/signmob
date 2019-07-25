@@ -31,7 +31,7 @@
 
   <body>
 
-    <div class="mb-1">
+    <header class="mb-1">
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -68,19 +68,25 @@
         </div>
       </nav>
 
-    </div>
+    </header>
 
-    <div class="container mt-3">
+    <main>
 
       {% if messages %}
+        <div class="container mt-2 mb-2">
           {% for message in messages %}
               <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
           {% endfor %}
+        </div>
       {% endif %}
 
-      {% block content %}{% endblock content %}
+      {% block main %}
+        <div class="container">
+          {% block content %}{% endblock content %}
+        </div>
+      {% endblock main %}
 
-    </div> <!-- /container -->
+    </main> <!-- /container -->
 
     {% block modal %}{% endblock modal %}
 

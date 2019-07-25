@@ -6,8 +6,10 @@
 <link rel="stylesheet" href="{% static "schedule.css" %}" type="text/css" media="screen">
 {% endblock %}
 
-{% block content %}
-{% block body %}{% endblock %}
+{% block main %}
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
 {% endblock %}
 
 {% block javascript %}
