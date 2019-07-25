@@ -1,0 +1,597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-25 15:30+0200\n"
+"PO-Revision-Date: 2019-07-25 15:30+0200\n"
+"Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.de>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
+
+#: signmob/templates/account/account_inactive.html:5
+#: signmob/templates/account/account_inactive.html:8
+msgid "Account Inactive"
+msgstr "Konto inaktiv"
+
+#: signmob/templates/account/account_inactive.html:10
+msgid "This account is inactive."
+msgstr "Dieses Konto ist nicht aktiv."
+
+#: signmob/templates/account/email.html:7
+msgid "Account"
+msgstr "Konto"
+
+#: signmob/templates/account/email.html:10
+msgid "E-mail Addresses"
+msgstr "E-Mail-Adressen"
+
+#: signmob/templates/account/email.html:13
+msgid "The following e-mail addresses are associated with your account:"
+msgstr "Die folgenden E-Mail-Adressen sind mit deinem Konto verknüpft"
+
+#: signmob/templates/account/email.html:27
+msgid "Verified"
+msgstr "Bestätigt"
+
+#: signmob/templates/account/email.html:29
+msgid "Unverified"
+msgstr "Unbestätigt"
+
+#: signmob/templates/account/email.html:31
+msgid "Primary"
+msgstr "Primär"
+
+#: signmob/templates/account/email.html:37
+msgid "Make Primary"
+msgstr "Als primär setzen"
+
+#: signmob/templates/account/email.html:38
+msgid "Re-send Verification"
+msgstr "Bestätigung neuversenden"
+
+#: signmob/templates/account/email.html:39
+msgid "Remove"
+msgstr "Entfernen"
+
+#: signmob/templates/account/email.html:46
+msgid "Warning:"
+msgstr "Warnung:"
+
+#: signmob/templates/account/email.html:46
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+"Du hast momentan keine E-Mail-Adressen. Das solltest du ändern, damit du "
+"Benachrichtigungen erhalten kannst und dein Passwort zurücksetzen kannst."
+
+#: signmob/templates/account/email.html:51
+msgid "Add E-mail Address"
+msgstr "E-Mail-Adresse hinzufügen"
+
+#: signmob/templates/account/email.html:56
+msgid "Add E-mail"
+msgstr "E-Mail-Adresse hinzufügen"
+
+#: signmob/templates/account/email.html:66
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr "Möchtest du wirklich die ausgewählte E-Mail-Adresse entfernen?"
+
+#: signmob/templates/account/email_confirm.html:6
+#: signmob/templates/account/email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr "E-Mail-Adresse bestätigen"
+
+#: signmob/templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+"Bitte bestätige, dass <a href=\"mailto:%(email)s\">%(email)s</a> eine E-Mail-"
+"Adresse von %(user_display)s ist."
+
+#: signmob/templates/account/email_confirm.html:20
+msgid "Confirm"
+msgstr "Bestätigen"
+
+#: signmob/templates/account/email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+"Dieser Bestätigungs-Link ist abgelaufen oder inkorrekt. Bitte <a href="
+"\"%(email_url)s\">fordere eine neuen Bestätigungslink an</a>."
+
+#: signmob/templates/account/login.html:7
+#: signmob/templates/account/login.html:11
+#: signmob/templates/account/login.html:44 signmob/templates/base.html:65
+msgid "Sign In"
+msgstr "Einloggen"
+
+#: signmob/templates/account/login.html:16
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
+"up</a>\n"
+"for a %(site_name)s account and sign in below:"
+msgstr ""
+"Bitte logge dich mit einem\n"
+"deiner bestehenden Drittparteikonten ein. Oder <a href=\"%(signup_url)s"
+"\">registriere</a>\n"
+"dich für einen %(site_name)s-Konto und loggen dich unten ein:"
+
+#: signmob/templates/account/login.html:26
+msgid "or"
+msgstr "oder"
+
+#: signmob/templates/account/login.html:33
+#, python-format
+msgid ""
+"If you have not created an account yet, then please\n"
+"<a href=\"%(signup_url)s\">sign up</a> first."
+msgstr ""
+"Falls du noch kein Konto erstellt hast, dann bitte\n"
+"<a href=\"%(signup_url)s\">registriere dich</a> zuerst."
+
+#: signmob/templates/account/login.html:43
+msgid "Forgot Password?"
+msgstr "Passwort vergessen?"
+
+#: signmob/templates/account/logout.html:5
+#: signmob/templates/account/logout.html:8
+#: signmob/templates/account/logout.html:17 signmob/templates/base.html:56
+msgid "Sign Out"
+msgstr "Abmelden"
+
+#: signmob/templates/account/logout.html:10
+msgid "Are you sure you want to sign out?"
+msgstr "Bist du sich, dass du dich abmelden willst?"
+
+#: signmob/templates/account/password_change.html:6
+#: signmob/templates/account/password_change.html:9
+#: signmob/templates/account/password_change.html:14
+#: signmob/templates/account/password_reset_from_key.html:5
+#: signmob/templates/account/password_reset_from_key.html:8
+#: signmob/templates/account/password_reset_from_key_done.html:4
+#: signmob/templates/account/password_reset_from_key_done.html:7
+msgid "Change Password"
+msgstr "Passwort ändern"
+
+#: signmob/templates/account/password_reset.html:7
+#: signmob/templates/account/password_reset.html:11
+#: signmob/templates/account/password_reset_done.html:6
+#: signmob/templates/account/password_reset_done.html:9
+msgid "Password Reset"
+msgstr "Passwort zurücksetzen"
+
+#: signmob/templates/account/password_reset.html:16
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+"Hast du dein Passwort vergessen? Gib dein E-Mail-Adresse hier ein und wir "
+"senden dir einen Link zum Zurücksetzen des Passworts."
+
+#: signmob/templates/account/password_reset.html:21
+msgid "Reset My Password"
+msgstr "Passwort zurücksetzen"
+
+#: signmob/templates/account/password_reset.html:24
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr "Bitte melde dich, falls du Problem hast, dein Passwort zurückzusetzen."
+
+#: signmob/templates/account/password_reset_done.html:15
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+"Wir haben dir eine E-Mail geschickt. Bitte sag Bescheid, falls du in den "
+"nächsten Minuten keine E-Mail erhältst."
+
+#: signmob/templates/account/password_reset_from_key.html:8
+msgid "Bad Token"
+msgstr "Falscher Token"
+
+#: signmob/templates/account/password_reset_from_key.html:12
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+"Der Passwort-Zurücksetzen-Link war ungültig, vermutlich weil er schon mal "
+"benutzt wurde. Bitte fordere einen <a href=\"%(passwd_reset_url)s\">neuen "
+"Link an</a>."
+
+#: signmob/templates/account/password_reset_from_key.html:18
+msgid "change password"
+msgstr "Passwort ändern"
+
+#: signmob/templates/account/password_reset_from_key.html:21
+#: signmob/templates/account/password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr "Dein Passwort ist jetzt geändert."
+
+#: signmob/templates/account/password_set.html:6
+#: signmob/templates/account/password_set.html:9
+#: signmob/templates/account/password_set.html:14
+msgid "Set Password"
+msgstr "Passwort setzen"
+
+#: signmob/templates/account/signup.html:6
+msgid "Signup"
+msgstr "Registrieren"
+
+#: signmob/templates/account/signup.html:9
+#: signmob/templates/account/signup.html:19 signmob/templates/base.html:61
+msgid "Sign Up"
+msgstr "Registrieren"
+
+#: signmob/templates/account/signup.html:11
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+"Hast du schon ein Konto? Dann bitte <a href=\"%(login_url)s\">einloggen</a>."
+
+#: signmob/templates/account/signup_closed.html:5
+#: signmob/templates/account/signup_closed.html:8
+msgid "Sign Up Closed"
+msgstr "Registrierung geschlossen"
+
+#: signmob/templates/account/signup_closed.html:10
+msgid "We are sorry, but the sign up is currently closed."
+msgstr "Entschuldige bitte, aber die Registrierung ist momentan geschlossen."
+
+#: signmob/templates/account/verification_sent.html:5
+#: signmob/templates/account/verification_sent.html:8
+#: signmob/templates/account/verified_email_required.html:5
+#: signmob/templates/account/verified_email_required.html:8
+msgid "Verify Your E-mail Address"
+msgstr "Bestätige deine E-Mail-Adresse"
+
+#: signmob/templates/account/verification_sent.html:10
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+"Wir haben dir eine E-Mail zur Bestätigung geschickt. Bitte folge dem Link in "
+"der E-Mail, um den Registrierungprozess abzuschließen. Bitte sag uns "
+"Bescheid, falls du keine E-Mail in den nächsten Minuten erhältst."
+
+#: signmob/templates/account/verified_email_required.html:12
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+
+#: signmob/templates/account/verified_email_required.html:16
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside this e-mail. Please\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+"Wir haben dir eine E-Mail geschickt zur Bestätigung.\n"
+"Bitte klick auf den Link in der E-Mail. Sag uns Bescheid, wenn du innerhalb "
+"weniger Minuten keine E-Mail erhältst."
+
+#: signmob/templates/account/verified_email_required.html:20
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+"<strong>Beachte:</strong> du kannst noch <a href=\"%(email_url)s\">deine E-"
+"Mail-Adresse ändern</a>."
+
+#: signmob/templates/base.html:52
+msgid "My Profile"
+msgstr "Mein Profil"
+
+#: signmob/templates/schedule/_calendar_tri_month.html:8
+#: signmob/templates/schedule/calendar_month.html:11
+msgid "This month"
+msgstr "Dieser Monat"
+
+#: signmob/templates/schedule/_calendar_tri_month.html:23
+msgid "Monthly Calendar"
+msgstr "Monatlicher Kalender"
+
+#: signmob/templates/schedule/_calendar_tri_month.html:26
+#: signmob/templates/schedule/calendar_month.html:23
+msgid "Full Year Calendar"
+msgstr "Kalender für das ganze Jahr"
+
+#: signmob/templates/schedule/_detail.html:14
+#: signmob/templates/schedule/event.html:35
+#: signmob/templates/schedule/occurrence.html:35
+msgid "Starts"
+msgstr "Beginnt"
+
+#: signmob/templates/schedule/_detail.html:15
+#: signmob/templates/schedule/event.html:36
+#: signmob/templates/schedule/occurrence.html:36
+#, python-format
+msgid "%(start_date)s"
+msgstr "%(start_date)s"
+
+#: signmob/templates/schedule/_detail.html:18
+#: signmob/templates/schedule/event.html:39
+#: signmob/templates/schedule/occurrence.html:39
+msgid "Ends"
+msgstr "Ended"
+
+#: signmob/templates/schedule/_detail.html:19
+#: signmob/templates/schedule/_detail.html:29
+#: signmob/templates/schedule/event.html:40
+#: signmob/templates/schedule/occurrence.html:40
+#, python-format
+msgid "%(end_date)s"
+msgstr "%(end_date)s"
+
+#: signmob/templates/schedule/_detail.html:24
+#: signmob/templates/schedule/event.html:43
+#: signmob/templates/schedule/occurrence.html:43
+msgid "Reoccurs"
+msgstr "Wiederkehrend"
+
+#: signmob/templates/schedule/_detail.html:28
+msgid "Until"
+msgstr "Bis"
+
+#: signmob/templates/schedule/_detail.html:36
+#: signmob/templates/schedule/event.html:51
+#: signmob/templates/schedule/occurrence.html:51
+msgid "Description"
+msgstr "Beschreibung"
+
+#: signmob/templates/schedule/_detail.html:41
+msgid "Close"
+msgstr "Schließen"
+
+#: signmob/templates/schedule/calendar.html:7
+msgid "Calendar metadata"
+msgstr "Kalender-Metadaten"
+
+#: signmob/templates/schedule/calendar.html:9
+msgid "Name:"
+msgstr "Name:"
+
+#: signmob/templates/schedule/calendar.html:10
+msgid "Slug:"
+msgstr "URL-Kürzel:"
+
+#: signmob/templates/schedule/calendar.html:11
+msgid "Event count:"
+msgstr "Terminanzahl:"
+
+#: signmob/templates/schedule/calendar.html:14
+msgid "See as:"
+msgstr "Siehe als:"
+
+#: signmob/templates/schedule/calendar.html:16
+#: signmob/templates/schedule/calendar_list.html:9
+msgid "Small Month"
+msgstr "Kleiner Monat"
+
+#: signmob/templates/schedule/calendar.html:17
+#: signmob/templates/schedule/calendar_list.html:10
+msgid "1 Month"
+msgstr "1 Monat"
+
+#: signmob/templates/schedule/calendar.html:18
+#: signmob/templates/schedule/calendar_list.html:11
+msgid "3 Months"
+msgstr "3 Monate"
+
+#: signmob/templates/schedule/calendar.html:19
+#: signmob/templates/schedule/calendar_list.html:12
+msgid "This Year"
+msgstr "Dieses Jahr"
+
+#: signmob/templates/schedule/calendar.html:20
+#: signmob/templates/schedule/calendar_list.html:13
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#: signmob/templates/schedule/calendar.html:21
+#: signmob/templates/schedule/calendar_list.html:14
+msgid "Daily"
+msgstr "Täglich"
+
+#: signmob/templates/schedule/calendar.html:22
+#: signmob/templates/schedule/calendar_list.html:15
+msgid "Feed"
+msgstr "Feed"
+
+#: signmob/templates/schedule/calendar.html:26
+msgid "Now see docstring for schedule.views.calendar"
+msgstr ""
+
+#: signmob/templates/schedule/calendar_day.html:9
+msgid "Week"
+msgstr "Woche"
+
+#: signmob/templates/schedule/calendar_day.html:12
+#: signmob/templates/schedule/calendar_week.html:18
+#: signmob/templates/schedule/event.html:10
+#: signmob/templates/schedule/occurrence.html:10
+msgid "Month"
+msgstr "Monat"
+
+#: signmob/templates/schedule/calendar_day.html:15
+#: signmob/templates/schedule/calendar_week.html:21
+#: signmob/templates/schedule/event.html:13
+#: signmob/templates/schedule/occurrence.html:13
+msgid "Year"
+msgstr "Jahr"
+
+#: signmob/templates/schedule/calendar_list.html:3
+#: signmob/templates/schedule/calendar_list.html:5
+msgid "Available Calendars"
+msgstr "Verfügbare Kalender"
+
+#: signmob/templates/schedule/calendar_month.html:20
+msgid "Three Month Calendar"
+msgstr "Drei-Monats-Kalender"
+
+#: signmob/templates/schedule/calendar_week.html:11
+msgid "\\W\\e\\ek W, M Y"
+msgstr "\\W\\o\\c\\h\\e W, M Y"
+
+#: signmob/templates/schedule/calendar_year.html:21
+msgid "Current Month Calendar"
+msgstr "Momentaner Monatskalender"
+
+#: signmob/templates/schedule/calendar_year.html:24
+msgid "Current Year Calendar"
+msgstr "Momentaner Jahreskalender"
+
+#: signmob/templates/schedule/cancel_occurrence.html:5
+#: signmob/templates/schedule/delete_event.html:5
+#: signmob/templates/schedule/event.html:29
+#: signmob/templates/schedule/occurrence.html:29
+msgid "Delete"
+msgstr "Löschen"
+
+#: signmob/templates/schedule/cancel_occurrence.html:6
+msgid "Are you sure that you really want to cancel this occurrence?"
+msgstr "Möchtest du diese Terminereignis wirklich absagen?"
+
+#: signmob/templates/schedule/cancel_occurrence.html:10
+#, python-format
+msgid ""
+"\n"
+"  <strong>From</strong> %(start_date)s\n"
+"  <strong>to</strong> %(end_date)s<br>\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>Von</strong> %(start_date)s\n"
+"  <strong>bis</strong> %(end_date)s<br>\n"
+"  "
+
+#: signmob/templates/schedule/create_event.html:5
+msgid "Create or change event. All fields are required."
+msgstr "Termin anlegen oder ändern. Alle Felder sind verpflichtend."
+
+#: signmob/templates/schedule/create_event.html:13
+#: signmob/templates/schedule/edit_occurrence.html:13
+msgid "Save"
+msgstr "Speichern"
+
+#: signmob/templates/schedule/delete_event.html:6
+msgid "Are you sure that you really want to delete it?"
+msgstr "Bist du sicher, dass du das wirklich löschen willst?"
+
+#: signmob/templates/schedule/edit_occurrence.html:5
+msgid "Create or change occurrence. All fields are required."
+msgstr ""
+"Ein Terminereignis anlegen oder ändern. Alle Felder sind verpflichtend."
+
+#: signmob/templates/schedule/event.html:7
+#: signmob/templates/schedule/occurrence.html:7
+msgid "Day"
+msgstr "Tag"
+
+#: signmob/templates/schedule/event.html:25
+#: signmob/templates/schedule/occurrence.html:25
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: signmob/templates/schedule/event.html:45
+#: signmob/templates/schedule/occurrence.html:45
+msgid "until"
+msgstr "bis"
+
+#: signmob/templates/schedule/event.html:45
+#: signmob/templates/schedule/occurrence.html:45
+#, python-format
+msgid "%(end_recurring_date)s"
+msgstr "%(end_recurring_date)s"
+
+#: signmob/templates/schedule/event.html:47
+#: signmob/templates/schedule/occurrence.html:47
+msgid "Never. This is a 'one time only' event."
+msgstr "Nie. Dies ist ein einmaliger Termin."
+
+#: signmob/users/apps.py:7
+msgid "Users"
+msgstr "Nutzer"
+
+#: signmob/users/models.py:61
+msgid "username"
+msgstr "Nutzername"
+
+#: signmob/users/models.py:65
+msgid "150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "150 Zeichen oder weniger. Nut Buchstaben, Zahlen und @/./+/-/_."
+
+#: signmob/users/models.py:68
+msgid "A user with that username already exists."
+msgstr "Ein Nutzer mit diesem Nutzernamen existiert bereits."
+
+#: signmob/users/models.py:70
+msgid "Name of User"
+msgstr "Name des Nutzers"
+
+#: signmob/users/models.py:71
+msgid "email address"
+msgstr "E-Mail-Adresse"
+
+#: signmob/users/models.py:72
+msgid "Phone number"
+msgstr "Handy-Nummer"
+
+#: signmob/users/models.py:75
+msgid "staff status"
+msgstr ""
+
+#: signmob/users/models.py:77
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: signmob/users/models.py:80
+msgid "active"
+msgstr ""
+
+#: signmob/users/models.py:83
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: signmob/users/models.py:87
+msgid "date joined"
+msgstr "Beitrittsdatum"
+
+#: signmob/users/models.py:90
+msgid "date deactivated"
+msgstr "Deaktivierungsdatum"
+
+#: signmob/users/models.py:93
+msgid "deleted"
+msgstr "gelöscht"
+
+#: signmob/users/models.py:95
+msgid "Designates whether this user was deleted."
+msgstr "Ob der Nutzer gelöscht wurde"
+
+#: signmob/users/models.py:98
+msgid "date left"
+msgstr "Datum ausgetreten"
