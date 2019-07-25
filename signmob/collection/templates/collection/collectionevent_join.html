@@ -12,12 +12,14 @@
   </h2>
 
   {% if object.group %}
-    <div class="float-right">
-      <a href="{{ object.group.get_absolute_url }}">
-        <span class="badge badge-primary">
-          {{ object.group.name }}
-        </span>
-      </a>
+    <div>
+      <p>
+        <a href="{{ object.group.get_absolute_url }}">
+          <span class="badge badge-primary">
+            {{ object.group }}
+          </span>
+        </a>
+      </p>
     </div>
   {% endif %}
 
