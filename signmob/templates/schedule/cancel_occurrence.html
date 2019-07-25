@@ -7,7 +7,7 @@
 
 <form action="" method="post">{% csrf_token %}
   <h2>{{ occurrence.title }}</h2>
-  {% blocktrans with start_date=occurrence.start|date:_("DATETIME_FORMAT") end_date=occurrence.end|date:_("DATETIME_FORMAT") %}
+  {% blocktrans with start_date=occurrence.start|date:"DATETIME_FORMAT" end_date=occurrence.end|date:"DATETIME_FORMAT" %}
   <strong>From</strong> {{ start_date }}
   <strong>to</strong> {{ end_date }}<br>
   {% endblocktrans %}

@@ -33,16 +33,16 @@
 <table align="center" class="table table-hover">
 <tr>
 <td>{% trans "Starts" %}</td>
-<td>{% blocktrans with occurrence.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</td>
+<td>{% blocktrans with occurrence.start|date:"DATETIME_FORMAT" as start_date %}{{ start_date }}{% endblocktrans %}</td>
 </tr>
 <tr>
 <td>{% trans "Ends" %}</td>
-<td>{% blocktrans with occurrence.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</td>
+<td>{% blocktrans with occurrence.end|date:"DATETIME_FORMAT" as end_date %}{{ end_date }}{% endblocktrans %}</td>
 </tr>
 <tr>
 <td>{% trans "Reoccurs" %}</td>
 {% if occurrence.event.rule %}
-<td>{{ occurrence.event.rule.name }} {% trans "until" %} {% blocktrans with occurrence.event.end_recurring_period|date:_("DATETIME_FORMAT") as end_recurring_date %}{{ end_recurring_date }}{% endblocktrans %}</td>
+<td>{{ occurrence.event.rule.name }} {% trans "until" %} {% blocktrans with occurrence.event.end_recurring_period|date:"DATETIME_FORMAT" as end_recurring_date %}{{ end_recurring_date }}{% endblocktrans %}</td>
 {% else %}
 <td>{% trans "Never. This is a 'one time only' event." %}</td>
 {% endif %}

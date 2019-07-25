@@ -12,11 +12,11 @@
         <table class="table table-striped">
             <tr>
                 <td class="left">{% trans "Starts" %}</td>
-                <td>{% blocktrans with occurrence.start|date:_("DATETIME_FORMAT") as start_date %}{{ start_date }}{% endblocktrans %}</td>
+                <td>{% blocktrans with occurrence.start|date:"DATETIME_FORMAT" as start_date %}{{ start_date }}{% endblocktrans %}</td>
             </tr>
             <tr>
                 <td class="left">{% trans "Ends" %}</td>
-                <td>{% blocktrans with occurrence.end|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</td>
+                <td>{% blocktrans with occurrence.end|date:"DATETIME_FORMAT" as end_date %}{{ end_date }}{% endblocktrans %}</td>
             </tr>
             {% if occurrence.event.rule %}
                 {% if not occurrence.id %}
@@ -26,7 +26,7 @@
                     {% if occurrence.event.end_recurring_period %}
                         <tr>
                             <td class="left">{% trans "Until" %}</td>
-                            <td>{% blocktrans with occurrence.event.end_recurring_period|date:_("DATETIME_FORMAT") as end_date %}{{ end_date }}{% endblocktrans %}</td>
+                            <td>{% blocktrans with occurrence.event.end_recurring_period|date:"DATETIME_FORMAT" as end_date %}{{ end_date }}{% endblocktrans %}</td>
                         </tr>
                     {% endif %}
                 {% endif %}
