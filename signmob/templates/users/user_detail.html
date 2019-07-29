@@ -21,10 +21,13 @@
   <div class="col-sm-12">
     <ul>
       <li>
-        <a href="{% url 'users:update' %}" role="button">Name, Handynr. oder Ortsverantwortlichkeit ändern</a>
+        <a href="{% url 'users:update' %}">Name, Handynr. oder Ortsverantwortlichkeit ändern</a>
       </li>
       <li>
-        <a href="{% url 'account_email' %}" role="button">E-Mail ändern oder hinzufügen</a>
+        <a href="{% url 'account_email' %}">E-Mail ändern oder hinzufügen</a>
+      </li>
+      <li>
+        <a href="{% url 'account_set_password' %}">Passwort ändern</a>
       </li>
     </ul>
     <!-- Your Stuff: Custom user template urls -->
