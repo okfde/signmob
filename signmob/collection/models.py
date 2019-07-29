@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.db.models.functions import Distance
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.formats import date_format
@@ -23,6 +24,15 @@ class CollectionGroupMember(models.Model):
         return self.user.name
 
 
+class CollectionGroupManager(models.Manager):
+    def get_closest(self, geo):
+        return (
+            self.get_queryset()
+            .annotate(distance=Distance("geo", geo))
+            .order_by("distance")
+        )[0]
+
+
 class CollectionGroup(models.Model):
     name = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
@@ -35,6 +45,8 @@ class CollectionGroup(models.Model):
     calendar = models.ForeignKey(
         Calendar, null=True, blank=True, on_delete=models.SET_NULL
     )
+
+    objects = CollectionGroupManager()
 
     class Meta:
         verbose_name = 'Team'
