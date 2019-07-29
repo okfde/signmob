@@ -21,10 +21,10 @@
   <div class="col-sm-12">
     <ul>
       <li>
-        <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">Name oder Handynr. ändern</a>
+        <a href="{% url 'users:update' %}" role="button">Name, Handynr. oder Ortsverantwortlichkeit ändern</a>
       </li>
       <li>
-        <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail ändern oder hinzufügen</a>
+        <a href="{% url 'account_email' %}" role="button">E-Mail ändern oder hinzufügen</a>
       </li>
     </ul>
     <!-- Your Stuff: Custom user template urls -->
@@ -37,4 +37,3 @@
 
 </div>
 {% endblock content %}
-

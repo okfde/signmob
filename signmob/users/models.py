@@ -2,6 +2,7 @@ import hashlib
 import hmac
 
 from django.db import models
+from django.contrib.gis.db import models as geo_models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
@@ -70,6 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
     email = models.EmailField(_("email address"), unique=True, null=True, blank=True)
     mobile = models.CharField(_('Phone number'), blank=True, max_length=255)
+    geo = geo_models.PointField(null=True, blank=True, geography=True)
 
     is_staff = models.BooleanField(
         _("staff status"),

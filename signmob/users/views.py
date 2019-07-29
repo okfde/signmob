@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.urls import reverse
 from django.views.generic import DetailView, RedirectView, UpdateView
 
+from leaflet.forms.widgets import LeafletWidget
+
 User = get_user_model()
 
 
@@ -18,16 +20,27 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 user_detail_view = UserDetailView.as_view()
 
 
+class KiezWidget(LeafletWidget):
+    geom_type = 'Point'
+
+
 class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     model = User
-    fields = ["name", "mobile"]
+    fields = ["name", "mobile", "geo"]
 
     def get_success_url(self):
-        return reverse("users:detail", kwargs={"pk": self.request.user.pk})
+        return reverse("users:detail")
 
     def get_object(self):
         return User.objects.get(pk=self.request.user.pk)
+
+    def get_form(self, form_class=None):
+        form = super().get_form()
+        form.fields['geo'].label = 'Dein Kiez'
+        form.fields['geo'].help_text = 'Bitte zoom an deinen Kiez heran. Dann klicke links auf den Marker und setze in die Gegend, für die du dich verantwortlich fühlst.'
+        form.fields['geo'].widget = KiezWidget()
+        return form
 
 
 user_update_view = UserUpdateView.as_view()
