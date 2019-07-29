@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-25 15:30+0200\n"
-"PO-Revision-Date: 2019-07-25 15:30+0200\n"
+"POT-Creation-Date: 2019-07-25 21:38+0200\n"
+"PO-Revision-Date: 2019-07-29 18:19+0200\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -304,7 +304,7 @@ msgid "My Profile"
 msgstr "Mein Profil"
 
 #: signmob/templates/schedule/_calendar_tri_month.html:8
-#: signmob/templates/schedule/calendar_month.html:11
+#: signmob/templates/schedule/calendar_month.html:15
 msgid "This month"
 msgstr "Dieser Monat"
 
@@ -313,7 +313,6 @@ msgid "Monthly Calendar"
 msgstr "Monatlicher Kalender"
 
 #: signmob/templates/schedule/_calendar_tri_month.html:26
-#: signmob/templates/schedule/calendar_month.html:23
 msgid "Full Year Calendar"
 msgstr "Kalender für das ganze Jahr"
 
@@ -345,7 +344,7 @@ msgid "%(end_date)s"
 msgstr "%(end_date)s"
 
 #: signmob/templates/schedule/_detail.html:24
-#: signmob/templates/schedule/event.html:43
+#: signmob/templates/schedule/event.html:44
 #: signmob/templates/schedule/occurrence.html:43
 msgid "Reoccurs"
 msgstr "Wiederkehrend"
@@ -355,7 +354,6 @@ msgid "Until"
 msgstr "Bis"
 
 #: signmob/templates/schedule/_detail.html:36
-#: signmob/templates/schedule/event.html:51
 #: signmob/templates/schedule/occurrence.html:51
 msgid "Description"
 msgstr "Beschreibung"
@@ -364,64 +362,48 @@ msgstr "Beschreibung"
 msgid "Close"
 msgstr "Schließen"
 
-#: signmob/templates/schedule/calendar.html:7
-msgid "Calendar metadata"
-msgstr "Kalender-Metadaten"
-
-#: signmob/templates/schedule/calendar.html:9
-msgid "Name:"
-msgstr "Name:"
-
-#: signmob/templates/schedule/calendar.html:10
-msgid "Slug:"
-msgstr "URL-Kürzel:"
-
-#: signmob/templates/schedule/calendar.html:11
+#: signmob/templates/schedule/calendar.html:8
 msgid "Event count:"
 msgstr "Terminanzahl:"
 
-#: signmob/templates/schedule/calendar.html:14
+#: signmob/templates/schedule/calendar.html:11
 msgid "See as:"
 msgstr "Siehe als:"
 
-#: signmob/templates/schedule/calendar.html:16
+#: signmob/templates/schedule/calendar.html:13
 #: signmob/templates/schedule/calendar_list.html:9
 msgid "Small Month"
 msgstr "Kleiner Monat"
 
-#: signmob/templates/schedule/calendar.html:17
+#: signmob/templates/schedule/calendar.html:14
 #: signmob/templates/schedule/calendar_list.html:10
 msgid "1 Month"
 msgstr "1 Monat"
 
-#: signmob/templates/schedule/calendar.html:18
+#: signmob/templates/schedule/calendar.html:15
 #: signmob/templates/schedule/calendar_list.html:11
 msgid "3 Months"
 msgstr "3 Monate"
 
-#: signmob/templates/schedule/calendar.html:19
+#: signmob/templates/schedule/calendar.html:16
 #: signmob/templates/schedule/calendar_list.html:12
 msgid "This Year"
 msgstr "Dieses Jahr"
 
-#: signmob/templates/schedule/calendar.html:20
+#: signmob/templates/schedule/calendar.html:17
 #: signmob/templates/schedule/calendar_list.html:13
 msgid "Weekly"
 msgstr "Wöchentlich"
 
-#: signmob/templates/schedule/calendar.html:21
+#: signmob/templates/schedule/calendar.html:18
 #: signmob/templates/schedule/calendar_list.html:14
 msgid "Daily"
 msgstr "Täglich"
 
-#: signmob/templates/schedule/calendar.html:22
+#: signmob/templates/schedule/calendar.html:19
 #: signmob/templates/schedule/calendar_list.html:15
 msgid "Feed"
 msgstr "Feed"
-
-#: signmob/templates/schedule/calendar.html:26
-msgid "Now see docstring for schedule.views.calendar"
-msgstr ""
 
 #: signmob/templates/schedule/calendar_day.html:9
 msgid "Week"
@@ -429,14 +411,14 @@ msgstr "Woche"
 
 #: signmob/templates/schedule/calendar_day.html:12
 #: signmob/templates/schedule/calendar_week.html:18
-#: signmob/templates/schedule/event.html:10
+#: signmob/templates/schedule/event.html:11
 #: signmob/templates/schedule/occurrence.html:10
 msgid "Month"
 msgstr "Monat"
 
 #: signmob/templates/schedule/calendar_day.html:15
 #: signmob/templates/schedule/calendar_week.html:21
-#: signmob/templates/schedule/event.html:13
+#: signmob/templates/schedule/event.html:14
 #: signmob/templates/schedule/occurrence.html:13
 msgid "Year"
 msgstr "Jahr"
@@ -446,73 +428,22 @@ msgstr "Jahr"
 msgid "Available Calendars"
 msgstr "Verfügbare Kalender"
 
-#: signmob/templates/schedule/calendar_month.html:20
-msgid "Three Month Calendar"
-msgstr "Drei-Monats-Kalender"
-
 #: signmob/templates/schedule/calendar_week.html:11
 msgid "\\W\\e\\ek W, M Y"
 msgstr "\\W\\o\\c\\h\\e W, M Y"
 
-#: signmob/templates/schedule/calendar_year.html:21
+#: signmob/templates/schedule/calendar_year.html:26
 msgid "Current Month Calendar"
 msgstr "Momentaner Monatskalender"
 
-#: signmob/templates/schedule/calendar_year.html:24
+#: signmob/templates/schedule/calendar_year.html:31
 msgid "Current Year Calendar"
 msgstr "Momentaner Jahreskalender"
 
-#: signmob/templates/schedule/cancel_occurrence.html:5
-#: signmob/templates/schedule/delete_event.html:5
-#: signmob/templates/schedule/event.html:29
-#: signmob/templates/schedule/occurrence.html:29
-msgid "Delete"
-msgstr "Löschen"
-
-#: signmob/templates/schedule/cancel_occurrence.html:6
-msgid "Are you sure that you really want to cancel this occurrence?"
-msgstr "Möchtest du diese Terminereignis wirklich absagen?"
-
-#: signmob/templates/schedule/cancel_occurrence.html:10
-#, python-format
-msgid ""
-"\n"
-"  <strong>From</strong> %(start_date)s\n"
-"  <strong>to</strong> %(end_date)s<br>\n"
-"  "
-msgstr ""
-"\n"
-"  <strong>Von</strong> %(start_date)s\n"
-"  <strong>bis</strong> %(end_date)s<br>\n"
-"  "
-
-#: signmob/templates/schedule/create_event.html:5
-msgid "Create or change event. All fields are required."
-msgstr "Termin anlegen oder ändern. Alle Felder sind verpflichtend."
-
-#: signmob/templates/schedule/create_event.html:13
-#: signmob/templates/schedule/edit_occurrence.html:13
-msgid "Save"
-msgstr "Speichern"
-
-#: signmob/templates/schedule/delete_event.html:6
-msgid "Are you sure that you really want to delete it?"
-msgstr "Bist du sicher, dass du das wirklich löschen willst?"
-
-#: signmob/templates/schedule/edit_occurrence.html:5
-msgid "Create or change occurrence. All fields are required."
-msgstr ""
-"Ein Terminereignis anlegen oder ändern. Alle Felder sind verpflichtend."
-
-#: signmob/templates/schedule/event.html:7
+#: signmob/templates/schedule/event.html:8
 #: signmob/templates/schedule/occurrence.html:7
 msgid "Day"
 msgstr "Tag"
-
-#: signmob/templates/schedule/event.html:25
-#: signmob/templates/schedule/occurrence.html:25
-msgid "Edit"
-msgstr "Bearbeiten"
 
 #: signmob/templates/schedule/event.html:45
 #: signmob/templates/schedule/occurrence.html:45
@@ -525,7 +456,14 @@ msgstr "bis"
 msgid "%(end_recurring_date)s"
 msgstr "%(end_recurring_date)s"
 
-#: signmob/templates/schedule/event.html:47
+#: signmob/templates/schedule/occurrence.html:25
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: signmob/templates/schedule/occurrence.html:29
+msgid "Delete"
+msgstr "Löschen"
+
 #: signmob/templates/schedule/occurrence.html:47
 msgid "Never. This is a 'one time only' event."
 msgstr "Nie. Dies ist ein einmaliger Termin."
@@ -595,3 +533,42 @@ msgstr "Ob der Nutzer gelöscht wurde"
 #: signmob/users/models.py:98
 msgid "date left"
 msgstr "Datum ausgetreten"
+
+#~ msgid "Calendar metadata"
+#~ msgstr "Kalender-Metadaten"
+
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#~ msgid "Slug:"
+#~ msgstr "URL-Kürzel:"
+
+#~ msgid "Three Month Calendar"
+#~ msgstr "Drei-Monats-Kalender"
+
+#~ msgid "Are you sure that you really want to cancel this occurrence?"
+#~ msgstr "Möchtest du diese Terminereignis wirklich absagen?"
+
+#~ msgid ""
+#~ "\n"
+#~ "  <strong>From</strong> %(start_date)s\n"
+#~ "  <strong>to</strong> %(end_date)s<br>\n"
+#~ "  "
+#~ msgstr ""
+#~ "\n"
+#~ "  <strong>Von</strong> %(start_date)s\n"
+#~ "  <strong>bis</strong> %(end_date)s<br>\n"
+#~ "  "
+
+#~ msgid "Create or change event. All fields are required."
+#~ msgstr "Termin anlegen oder ändern. Alle Felder sind verpflichtend."
+
+#~ msgid "Save"
+#~ msgstr "Speichern"
+
+#~ msgid "Are you sure that you really want to delete it?"
+#~ msgstr "Bist du sicher, dass du das wirklich löschen willst?"
+
+#~ msgid "Create or change occurrence. All fields are required."
+#~ msgstr ""
+#~ "Ein Terminereignis anlegen oder ändern. Alle Felder sind verpflichtend."
