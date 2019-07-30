@@ -1,8 +1,8 @@
 {% extends "schedule/base.html" %}
 {% block container %}
   <div class="container-fluid">
-    <div class="row">
-      {% for occ in period.get_occurrences %}
+    {% for occ in period.get_occurrences %}
+      <div class="row">
         <div class="col-auto">
           <strong>{{ occ.start|date:"d.m." }}</strong><br/>
           {{ occ.start|date:"TIME_FORMAT" }}
@@ -17,7 +17,7 @@
             </a>
           </p>
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
   </div>
 {% endblock %}
