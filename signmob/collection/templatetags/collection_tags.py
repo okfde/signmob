@@ -45,14 +45,11 @@ def show_related_collection(event):
     except CollectionGroup.DoesNotExist:
         group = None
 
-    try:
-        event = CollectionEvent.objects.get(
-            event_occurence__event=event
-        )
-    except CollectionEvent.DoesNotExist:
-        event = None
+    events = CollectionEvent.objects.filter(
+        event_occurence__event=event
+    )
 
     return {
-        'event': event,
+        'events': events,
         'group': group
     }
