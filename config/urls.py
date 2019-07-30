@@ -6,8 +6,11 @@ from django.views import defaults as default_views
 
 from rest_framework.routers import DefaultRouter
 
+from schedule.views import CalendarByPeriodsView
+
 from signmob.collection.api_views import CollectionViewSet
 from signmob.users.views import link_login
+from signmob.utils import NextThreeWeeks
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -16,6 +19,12 @@ router.register(r"collection", CollectionViewSet, basename="collection")
 
 urlpatterns = [
     path("", include("signmob.collection.urls", namespace="collection")),
+    path(
+        "termine/calendar/next/<slug:calendar_slug>/",
+        CalendarByPeriodsView.as_view(template_name='schedule/three_weeks.html'),
+        name='schedule:next_three_weeks',
+        kwargs={'period': NextThreeWeeks}
+    ),
     path("termine/", include("schedule.urls")),
     path("api/", include(router.urls)),
     # Django Admin, use {% url 'admin:index' %}

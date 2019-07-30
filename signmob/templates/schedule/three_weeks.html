@@ -1,0 +1,23 @@
+{% extends "schedule/base.html" %}
+{% block container %}
+  <div class="container-fluid">
+    <div class="row">
+      {% for occ in period.get_occurrences %}
+        <div class="col-2">
+          <strong>{{ occ.start|date:"SHORT_DATE_FORMAT" }}</strong><br/>
+          {{ occ.start|date:"TIME_FORMAT" }}
+        </div>
+        <div class="col-10">
+          <h5 class="text-left">{{ occ.title }}</h5>
+          <p>
+            {{ occ.description }}
+            <a href="{{ occ.event.get_absolute_url }}" target="_blank" rel="noopener">
+              <span class="sr-only">Mehr erfahren</span>
+              &rarr;
+            </a>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
