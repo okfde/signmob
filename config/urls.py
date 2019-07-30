@@ -3,6 +3,7 @@ from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from rest_framework.routers import DefaultRouter
 
@@ -23,7 +24,9 @@ urlpatterns = [
 
     path(
         "termine/calendar/next/<slug:calendar_slug>/",
-        CalendarByPeriodsView.as_view(template_name='schedule/three_weeks.html'),
+        xframe_options_exempt(
+            CalendarByPeriodsView.as_view(template_name='schedule/three_weeks.html')
+        ),
         name='schedule:next_three_weeks',
         kwargs={'period': NextThreeWeeks}
     ),
