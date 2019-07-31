@@ -22,6 +22,20 @@ def get_mail_connection(**kwargs):
     )
 
 
+def send_simple_template_mail(user, subject, body, **kwargs):
+    mail_context = {
+        'name': user.name,
+        'url': user.get_autologin_url('/')[:-1],
+    }
+    user_subject = subject.format(**mail_context)
+    user_body = body.format(**mail_context)
+    return user.send_mail(
+        user_subject,
+        user_body,
+        **kwargs
+    )
+
+
 def send_template_email(
         email=None, user=None,
         subject=None, subject_template=None,
@@ -51,18 +65,11 @@ def send_mail(subject, body, user_email,
               **kwargs):
     if not user_email:
         return
-    if bounce_check:
-        # TODO: Check if this email should be sent
-        pass
+
     if from_email is None:
         from_email = settings.DEFAULT_FROM_EMAIL
 
     backend_kwargs = {}
-    if not priority and queue is None:
-        queue = settings.EMAIL_BULK_QUEUE
-    if queue is not None:
-        backend_kwargs['queue'] = queue
-
     connection = get_mail_connection(**backend_kwargs)
 
     if headers is None:
