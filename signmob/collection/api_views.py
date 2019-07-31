@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.db.models import (
-    F, Value, CharField, IntegerField, DateTimeField
+    F, Q, Value, CharField, IntegerField, DateTimeField
 )
 from django.conf import settings
 from django.urls import reverse
@@ -122,7 +122,10 @@ class CollectionViewSet(viewsets.ViewSet):
             .values_list(*columns)
         )
         locations = (
-            CollectionLocation.objects.all()
+            CollectionLocation.objects.filter(
+                (Q(end=None) | Q(end__gt=now))
+                & Q(start__lt=now)
+            )
             .annotate(
                 _address=F('address'),
                 _group=Value(None, output_field=IntegerField()),
