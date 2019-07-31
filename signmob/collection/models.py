@@ -3,6 +3,7 @@ from django.contrib.gis.db.models.functions import Distance
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.formats import date_format
+from django.conf import settings
 
 from schedule.models import Calendar, Occurrence, Event
 
@@ -26,11 +27,16 @@ class CollectionGroupMember(models.Model):
 
 class CollectionGroupManager(models.Manager):
     def get_closest(self, geo):
-        return (
+        if not geo:
+            return None
+        groups = (
             self.get_queryset()
             .annotate(distance=Distance("geo", geo))
             .order_by("distance")
-        )[0]
+        )
+        if groups:
+            return groups[0]
+        return None
 
 
 class CollectionGroup(models.Model):
@@ -57,6 +63,9 @@ class CollectionGroup(models.Model):
 
     def get_absolute_url(self):
         return reverse('collection:collectiongroup-detail', kwargs={'pk': self.pk})
+
+    def get_domain_url(self):
+        return settings.SITE_URL + self.get_absolute_url()
 
     def has_member(self, user):
         if not user.is_authenticated:
@@ -95,6 +104,12 @@ class CollectionLocation(models.Model):
 
     def get_absolute_url(self):
         return reverse('collection:collectionlocation-report', kwargs={'pk': self.pk})
+
+    def get_domain_url(self):
+        return settings.SITE_URL + self.get_absolute_url()
+
+    def get_domain_admin_url(self):
+        return settings.SITE_URL + reverse('admin:collection_collectionlocation_change', args=(self.pk,))
 
 
 class CollectionEventMember(models.Model):
@@ -161,6 +176,9 @@ class CollectionEvent(models.Model):
 
     def get_absolute_url(self):
         return reverse('collection:collectionevent-join', kwargs={'pk': self.pk})
+
+    def get_domain_url(self):
+        return settings.SITE_URL + self.get_absolute_url()
 
 
 class CollectionResult(models.Model):
