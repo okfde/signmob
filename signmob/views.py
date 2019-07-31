@@ -1,4 +1,5 @@
 import datetime
+
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404, Http404
 from django.utils import timezone
@@ -20,7 +21,7 @@ class OccurrencePreview(OccurrenceMixin, DetailView):
                 self.kwargs['hour'],
                 self.kwargs['minute'],
                 self.kwargs['second']
-            ), None
+            ), timezone.utc
         )
 
         occurrence = event.get_occurrence(date)

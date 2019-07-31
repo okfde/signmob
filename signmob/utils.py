@@ -13,12 +13,12 @@ class NextThreeWeeks(Period):
     """
     def __init__(self, events, date=None, parent_persisted_occurrences=None,
                  occurrence_pool=None, tzinfo=pytz.utc):
-        self.tzinfo = self._get_tzinfo(tzinfo)
+        self.tzinfo = pytz.utc  # self._get_tzinfo(tzinfo)
         if date is None:
-            date = timezone.now()
+            date = timezone.now().astimezone(self.tzinfo)
         start, end = self._get_range(date)
         super().__init__(events, start, end, parent_persisted_occurrences,
-                         occurrence_pool, tzinfo=tzinfo)
+                         occurrence_pool, tzinfo=self.tzinfo)
 
     def _get_range(self, date):
         if isinstance(date, datetime.datetime):
