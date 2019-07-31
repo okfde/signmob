@@ -14,12 +14,12 @@ class OccurrencePreview(OccurrenceMixin, DetailView):
         event = get_object_or_404(Event, id=self.kwargs['event_id'])
         date = timezone.make_aware(
             datetime.datetime(
-                int(self.kwargs['year']),
-                int(self.kwargs['month']),
-                int(self.kwargs['day']),
-                int(self.kwargs['hour']),
-                int(self.kwargs['minute']),
-                int(self.kwargs['second'])
+                self.kwargs['year'],
+                self.kwargs['month'],
+                self.kwargs['day'],
+                self.kwargs['hour'],
+                self.kwargs['minute'],
+                self.kwargs['second']
             ), None
         )
 

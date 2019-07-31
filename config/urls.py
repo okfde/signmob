@@ -3,41 +3,20 @@ from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
-from django.views.decorators.clickjacking import xframe_options_exempt
 
 from rest_framework.routers import DefaultRouter
 
-from schedule.views import CalendarByPeriodsView
-
 from signmob.collection.api_views import CollectionViewSet
 from signmob.users.views import link_login
-from signmob.utils import NextThreeWeeks
-from signmob.views import OccurrencePreview
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r"collection", CollectionViewSet, basename="collection")
 
-
 urlpatterns = [
     path("", include("signmob.collection.urls", namespace="collection")),
 
-    path(
-        "termine/calendar/next/<slug:calendar_slug>/",
-        xframe_options_exempt(
-            CalendarByPeriodsView.as_view(template_name='schedule/three_weeks.html')
-        ),
-        name='schedule:next_three_weeks',
-        kwargs={'period': NextThreeWeeks}
-    ),
-
-    # urls for unpersisted occurrences
-    path(
-        'termine/occurrence/<int:event_id>/<int:year>/<int:month>/<int:day>/<int:hour>/<int:minute>/<int:second>/',
-        OccurrencePreview.as_view(),
-        name='schedule:occurrence_by_date'
-    ),
-
+    path("termine/", include('signmob.calendar_urls', namespace='schedule')),
     path("termine/", include("schedule.urls")),
     path("api/", include(router.urls)),
     # Django Admin, use {% url 'admin:index' %}

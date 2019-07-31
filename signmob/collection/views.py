@@ -57,8 +57,7 @@ def join_group(request, pk):
     group = get_object_or_404(CollectionGroup, pk=pk)
 
     if request.user.is_authenticated:
-        if not CollectionGroupMember.objects.filter(
-                group=group, user=request.user).exists():
+        if not group.has_member(request.user):
             CollectionGroupMember.objects.create(
                 group=group,
                 user=request.user

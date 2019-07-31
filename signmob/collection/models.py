@@ -58,6 +58,12 @@ class CollectionGroup(models.Model):
     def get_absolute_url(self):
         return reverse('collection:collectiongroup-detail', kwargs={'pk': self.pk})
 
+    def has_member(self, user):
+        if not user.is_authenticated:
+            return False
+        return CollectionGroupMember.objects.filter(
+                group=self, user=user).exists()
+
 
 class CollectionLocation(models.Model):
     name = models.CharField(max_length=255, blank=True)

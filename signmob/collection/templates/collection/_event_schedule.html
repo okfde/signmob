@@ -1,6 +1,5 @@
 {% if group %}
-
-  {% include "collection/_collectiongroup_join.html" with object=group %}
+  {% include "collection/_collectiongroup_join.html" with object=group is_member=is_member %}
 
 
 {% endif %}

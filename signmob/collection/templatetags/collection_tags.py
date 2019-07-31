@@ -37,12 +37,14 @@ def get_signup_form():
 
 
 @register.inclusion_tag('collection/_event_schedule.html')
-def show_related_collection(event):
+def show_related_collection(request, event):
     calendar = event.calendar
 
     try:
         group = CollectionGroup.objects.get(calendar=calendar)
+        is_member = group.has_member(request.user)
     except CollectionGroup.DoesNotExist:
+        is_member = False
         group = None
 
     events = CollectionEvent.objects.filter(
@@ -50,6 +52,8 @@ def show_related_collection(event):
     )
 
     return {
+        'request': request,
         'events': events,
-        'group': group
+        'group': group,
+        'is_member': is_member
     }

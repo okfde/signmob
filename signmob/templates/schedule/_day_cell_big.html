@@ -3,7 +3,7 @@
   {% if day.has_occurrences %}
       {% for o in day.get_occurrence_partials %}
         <div class="starttime">
-            <a href="{{ o.occurrence.event.get_absolute_url }}">
+            <a href="{{ o.occurrence.get_absolute_url }}">
               {% ifequal o.class 0 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
               {% ifequal o.class 1 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
               {% ifequal o.class 2 %}(All day){% endifequal %}

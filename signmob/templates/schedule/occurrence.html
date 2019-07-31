@@ -19,14 +19,16 @@
 <td>{% trans "Ends" %}</td>
 <td>{% blocktrans with occurrence.end|date:"DATETIME_FORMAT" as end_date %}{{ end_date }}{% endblocktrans %}</td>
 </tr>
-{% if event.rule %}
-  <tr>
-    <td>{% trans "Reoccurs" %}</td>
-    <td>{{ event.rule.name }} {% trans "until" %} {% blocktrans with event.end_recurring_period|date:"DATETIME_FORMAT" as end_recurring_date %}{{ end_recurring_date }}{% endblocktrans %}</td>
-  </tr>
-{% endif %}
+{% with event=occurrence.event %}
+  {% if event.rule %}
+    <tr>
+      <td>{% trans "Reoccurs" %}</td>
+      <td>{{ event.rule.name }} {% trans "until" %} {% blocktrans with event.end_recurring_period|date:"DATETIME_FORMAT" as end_recurring_date %}{{ end_recurring_date }}{% endblocktrans %}</td>
+    </tr>
+  {% endif %}
+{% endwith %}
 </table>
 
-{% show_related_collection event %}
+{% show_related_collection request occurrence.event %}
 
 {% endblock %}
