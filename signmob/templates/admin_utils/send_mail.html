@@ -1,4 +1,4 @@
-{% extends "helper/admin_base_action.html" %}
+{% extends "admin_utils/admin_action_base.html" %}
 
 {% load i18n l10n %}
 
@@ -18,7 +18,7 @@
     <small>{% trans "You can use the following placeholders:" %} <code>{name}, {url}</code></small>
     <input type="hidden" name="action" value="send_mail" />
     <p>
-      <input type="submit" value="{% blocktrans count count=queryset.count %}Send mail to one user{% plural %}Send mail to {{ count }} users{% endblocktrans %}" />
+      <input type="submit" value="{% blocktrans count count=mail_count %}Send mail to one user{% plural %}Send mail to {{ count }} users{% endblocktrans %}" />
     </p>
   </div>
   {% if select_across %}
@@ -31,4 +31,6 @@
     {% endfor %}
   {% endif %}
 </form>
+<p>Alle E-Mail-Adressen zum selber nutzen:</p>
+<textarea cols="100" rows="4">{{ emails }}</textarea>
 {% endblock %}

@@ -8,6 +8,8 @@ from leaflet.admin import LeafletGeoAdmin
 from schedule.admin import EventAdmin
 from schedule.models import Event, Occurrence
 
+from signmob.admin_utils import SendMailMixin
+
 from .models import (
     CollectionGroup,
     CollectionEvent,
@@ -23,7 +25,7 @@ class CollectionEventMemberInline(admin.StackedInline):
     model = CollectionEventMember
 
 
-class CollectionEventAdmin(LeafletGeoAdmin):
+class CollectionEventAdmin(SendMailMixin, LeafletGeoAdmin):
     display_raw = False
     inlines = [CollectionEventMemberInline]
     save_on_top = True
@@ -40,6 +42,7 @@ class CollectionEventAdmin(LeafletGeoAdmin):
             'classes': ('collapse',)
         }),
     )
+    actions = ['send_mail']
 
     def get_urls(self):
         urls = super().get_urls()
@@ -87,6 +90,11 @@ class CollectionEventAdmin(LeafletGeoAdmin):
             )
         return redirect('admin:collection_collectionevent_change', c_event.id)
 
+    def _get_send_mail_user_ids(self, queryset):
+        # Send to all members of event, deduplicate
+        qs = CollectionEventMember.objects.filter(event__in=queryset)
+        return list(set(qs.values_list('user_id', flat=True)))
+
 
 class CollectionLocationAdmin(LeafletGeoAdmin):
     display_raw = True
@@ -99,19 +107,37 @@ class CollectionGroupMemberInline(admin.StackedInline):
     model = CollectionGroupMember
 
 
-class CollectionGroupAdmin(LeafletGeoAdmin):
+class CollectionGroupAdmin(SendMailMixin, LeafletGeoAdmin):
     inlines = [CollectionGroupMemberInline]
     save_on_top = True
+    actions = ['send_mail']
+
+    def _get_send_mail_user_ids(self, queryset):
+        # Send to all members of all selected groups
+        qs = CollectionGroupMember.objects.filter(group__in=queryset)
+        return list(qs.values_list('user_id', flat=True))
 
 
-class CollectionGroupMemberAdmin(admin.ModelAdmin):
+class CollectionGroupMemberAdmin(SendMailMixin, admin.ModelAdmin):
     list_display = ('user', 'group', 'joined')
     list_filter = ('responsible', 'group',)
     date_hierarchy = 'joined'
+    actions = ['send_mail']
+
+    def _get_send_mail_user_ids(self, queryset):
+        # Send to all selected members
+        return list(queryset.values_list('user_id', flat=True))
 
 
-class CollectionEventMemberAdmin(admin.ModelAdmin):
-    pass
+class CollectionEventMemberAdmin(SendMailMixin, admin.ModelAdmin):
+    date_hierarchy = 'start'
+    list_display = ('user', 'event', 'start', 'end')
+    list_filter = ('event__group',)
+    actions = ['send_mail']
+
+    def _get_send_mail_user_ids(self, queryset):
+        # Send to all selected members, deduplicate
+        return list(set(queryset.values_list('user_id', flat=True)))
 
 
 class CollectionResultAdmin(admin.ModelAdmin):

@@ -110,7 +110,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.name
 
     def get_autologin_url(self, url):
-        return settings.SITE_URL + reverse('account-go', kwargs={
+        return settings.SITE_URL + reverse('link_login', kwargs={
             "user_id": self.id,
             "secret": self.generate_autologin_secret(),
             "url": url
