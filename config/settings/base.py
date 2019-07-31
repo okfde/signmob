@@ -77,6 +77,7 @@ THIRD_PARTY_APPS = [
     "django_celery_beat",
     "schedule",
     "leaflet",
+    "djcelery_email",
 ]
 
 LOCAL_APPS = [
@@ -219,7 +220,8 @@ X_FRAME_OPTIONS = "DENY"
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = env(
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+CELERY_EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
 )
 
@@ -351,3 +353,8 @@ CHECK_CALENDAR_PERM_FUNC = nope
 ACCOUNT_FORMS = {
     'signup': 'signmob.users.forms.CustomSignupForm'
 }
+
+SLACK_WEBHOOK_URL = env('SLACK_WEBHOOK_URL', default='')
+SLACK_DEFAULT_CHANNEL = '#transparenzgesetz-mob'
+SLACK_LEGACY_TOKEN = env('SLACK_LEGACY_TOKEN', default='')
+SLACK_INVITE_CHANNELS = 'CD1626GNA'

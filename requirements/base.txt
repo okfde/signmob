@@ -24,3 +24,4 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 django-scheduler==0.8.8
 djangorestframework-gis==0.14
 django-leaflet==0.24.0
+django-celery-email==2.0.2
