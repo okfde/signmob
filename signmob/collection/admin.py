@@ -91,6 +91,8 @@ class CollectionEventAdmin(LeafletGeoAdmin):
 class CollectionLocationAdmin(LeafletGeoAdmin):
     display_raw = True
     raw_id_fields = ('events',)
+    list_display = ('name', 'address', 'start', 'end', 'needs_check',)
+    list_filter = ('needs_check', 'accumulation')
 
 
 class CollectionGroupMemberInline(admin.StackedInline):
