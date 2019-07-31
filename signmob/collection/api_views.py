@@ -111,7 +111,7 @@ class CollectionViewSet(viewsets.ViewSet):
             CollectionEvent.objects.filter(
                 event_occurence__end__gte=now,
                 event_occurence__start__lte=two_weeks,
-            ).order_by('-event_occurence__start')
+            ).order_by('event_occurence__start')
             .annotate(
                 _address=Value("", output_field=CharField()),
                 _group=F('group_id'),
