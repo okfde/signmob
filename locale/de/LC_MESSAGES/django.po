@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-25 21:38+0200\n"
-"PO-Revision-Date: 2019-07-29 18:27+0200\n"
+"POT-Creation-Date: 2019-07-31 17:37+0200\n"
+"PO-Revision-Date: 2019-07-31 17:39+0200\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,6 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2\n"
+
+#: signmob/admin_utils.py:30
+#, python-format
+msgid "%d mail tasks queued."
+msgstr "%d E-Mails werden verschickt."
+
+#: signmob/admin_utils.py:48 signmob/templates/admin_utils/send_mail.html:5
+#: signmob/templates/admin_utils/send_mail.html:8
+msgid "Send mail to users"
+msgstr "Sende E-Mail an ausgewählte Personen"
 
 #: signmob/templates/account/account_inactive.html:5
 #: signmob/templates/account/account_inactive.html:8
@@ -116,7 +126,7 @@ msgstr ""
 
 #: signmob/templates/account/login.html:7
 #: signmob/templates/account/login.html:11
-#: signmob/templates/account/login.html:44 signmob/templates/base.html:65
+#: signmob/templates/account/login.html:44 signmob/templates/base.html:71
 msgid "Sign In"
 msgstr "Einloggen"
 
@@ -152,7 +162,7 @@ msgstr "Passwort vergessen?"
 
 #: signmob/templates/account/logout.html:5
 #: signmob/templates/account/logout.html:8
-#: signmob/templates/account/logout.html:17 signmob/templates/base.html:56
+#: signmob/templates/account/logout.html:17 signmob/templates/base.html:62
 msgid "Sign Out"
 msgstr "Abmelden"
 
@@ -236,7 +246,7 @@ msgid "Signup"
 msgstr "Registrieren"
 
 #: signmob/templates/account/signup.html:9
-#: signmob/templates/account/signup.html:19 signmob/templates/base.html:61
+#: signmob/templates/account/signup.html:19 signmob/templates/base.html:67
 msgid "Sign Up"
 msgstr "Registrieren"
 
@@ -299,9 +309,32 @@ msgstr ""
 "<strong>Beachte:</strong> du kannst noch <a href=\"%(email_url)s\">deine E-"
 "Mail-Adresse ändern</a>."
 
+#: signmob/templates/admin_utils/admin_action_base.html:9
+msgid "Home"
+msgstr "Startseite"
+
+#: signmob/templates/admin_utils/send_mail.html:15
+msgid "Subject"
+msgstr "Betreff"
+
+#: signmob/templates/admin_utils/send_mail.html:18
+msgid "You can use the following placeholders:"
+msgstr "Du kannst die folgenden Platzhalter verwenden:"
+
+#: signmob/templates/admin_utils/send_mail.html:21
+#, python-format
+msgid "Send mail to one user"
+msgid_plural "Send mail to %(count)s users"
+msgstr[0] "Sende E-Mail an eine Person"
+msgstr[1] "Sende E-Mail an %(count)s Personen"
+
 #: signmob/templates/base.html:52
 msgid "My Profile"
 msgstr "Mein Profil"
+
+#: signmob/templates/base.html:57
+msgid "Admin"
+msgstr "Admin"
 
 #: signmob/templates/schedule/_calendar_tri_month.html:8
 #: signmob/templates/schedule/calendar_month.html:15
@@ -318,34 +351,34 @@ msgstr "Kalender für das ganze Jahr"
 
 #: signmob/templates/schedule/_detail.html:14
 #: signmob/templates/schedule/event.html:35
-#: signmob/templates/schedule/occurrence.html:35
+#: signmob/templates/schedule/occurrence.html:15
 msgid "Starts"
 msgstr "Beginnt"
 
 #: signmob/templates/schedule/_detail.html:15
 #: signmob/templates/schedule/event.html:36
-#: signmob/templates/schedule/occurrence.html:36
+#: signmob/templates/schedule/occurrence.html:16
 #, python-format
 msgid "%(start_date)s"
 msgstr "%(start_date)s"
 
 #: signmob/templates/schedule/_detail.html:18
 #: signmob/templates/schedule/event.html:39
-#: signmob/templates/schedule/occurrence.html:39
+#: signmob/templates/schedule/occurrence.html:19
 msgid "Ends"
 msgstr "Ended"
 
 #: signmob/templates/schedule/_detail.html:19
 #: signmob/templates/schedule/_detail.html:29
 #: signmob/templates/schedule/event.html:40
-#: signmob/templates/schedule/occurrence.html:40
+#: signmob/templates/schedule/occurrence.html:20
 #, python-format
 msgid "%(end_date)s"
 msgstr "%(end_date)s"
 
 #: signmob/templates/schedule/_detail.html:24
 #: signmob/templates/schedule/event.html:44
-#: signmob/templates/schedule/occurrence.html:43
+#: signmob/templates/schedule/occurrence.html:25
 msgid "Reoccurs"
 msgstr "Wiederkehrend"
 
@@ -354,7 +387,6 @@ msgid "Until"
 msgstr "Bis"
 
 #: signmob/templates/schedule/_detail.html:36
-#: signmob/templates/schedule/occurrence.html:51
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -412,14 +444,12 @@ msgstr "Woche"
 #: signmob/templates/schedule/calendar_day.html:12
 #: signmob/templates/schedule/calendar_week.html:18
 #: signmob/templates/schedule/event.html:11
-#: signmob/templates/schedule/occurrence.html:10
 msgid "Month"
 msgstr "Monat"
 
 #: signmob/templates/schedule/calendar_day.html:15
 #: signmob/templates/schedule/calendar_week.html:21
 #: signmob/templates/schedule/event.html:14
-#: signmob/templates/schedule/occurrence.html:13
 msgid "Year"
 msgstr "Jahr"
 
@@ -441,98 +471,94 @@ msgid "Current Year Calendar"
 msgstr "Momentaner Jahreskalender"
 
 #: signmob/templates/schedule/event.html:8
-#: signmob/templates/schedule/occurrence.html:7
 msgid "Day"
 msgstr "Tag"
 
 #: signmob/templates/schedule/event.html:45
-#: signmob/templates/schedule/occurrence.html:45
+#: signmob/templates/schedule/occurrence.html:26
 msgid "until"
 msgstr "bis"
 
 #: signmob/templates/schedule/event.html:45
-#: signmob/templates/schedule/occurrence.html:45
+#: signmob/templates/schedule/occurrence.html:26
 #, python-format
 msgid "%(end_recurring_date)s"
 msgstr "%(end_recurring_date)s"
-
-#: signmob/templates/schedule/occurrence.html:25
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: signmob/templates/schedule/occurrence.html:29
-msgid "Delete"
-msgstr "Löschen"
-
-#: signmob/templates/schedule/occurrence.html:47
-msgid "Never. This is a 'one time only' event."
-msgstr "Nie. Dies ist ein einmaliger Termin."
 
 #: signmob/users/apps.py:7
 msgid "Users"
 msgstr "Nutzer"
 
-#: signmob/users/models.py:61
+#: signmob/users/models.py:62
 msgid "username"
 msgstr "Nutzername"
 
-#: signmob/users/models.py:65
+#: signmob/users/models.py:66
 msgid "150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "150 Zeichen oder weniger. Nut Buchstaben, Zahlen und @/./+/-/_."
 
-#: signmob/users/models.py:68
+#: signmob/users/models.py:69
 msgid "A user with that username already exists."
 msgstr "Ein Nutzer mit diesem Nutzernamen existiert bereits."
 
-#: signmob/users/models.py:70
+#: signmob/users/models.py:71
 msgid "Name of User"
 msgstr "Name des Nutzers"
 
-#: signmob/users/models.py:71
+#: signmob/users/models.py:72
 msgid "email address"
 msgstr "E-Mail-Adresse"
 
-#: signmob/users/models.py:72
+#: signmob/users/models.py:73
 msgid "Phone number"
 msgstr "Handy-Nummer"
 
-#: signmob/users/models.py:75
+#: signmob/users/models.py:77
 msgid "staff status"
 msgstr ""
 
-#: signmob/users/models.py:77
+#: signmob/users/models.py:79
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: signmob/users/models.py:80
+#: signmob/users/models.py:82
 msgid "active"
 msgstr ""
 
-#: signmob/users/models.py:83
+#: signmob/users/models.py:85
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: signmob/users/models.py:87
+#: signmob/users/models.py:89
 msgid "date joined"
 msgstr "Beitrittsdatum"
 
-#: signmob/users/models.py:90
+#: signmob/users/models.py:92
 msgid "date deactivated"
 msgstr "Deaktivierungsdatum"
 
-#: signmob/users/models.py:93
+#: signmob/users/models.py:95
 msgid "deleted"
 msgstr "gelöscht"
 
-#: signmob/users/models.py:95
+#: signmob/users/models.py:97
 msgid "Designates whether this user was deleted."
 msgstr "Ob der Nutzer gelöscht wurde"
 
-#: signmob/users/models.py:98
+#: signmob/users/models.py:100
 msgid "date left"
 msgstr "Datum ausgetreten"
+
+#~ msgid "Edit"
+#~ msgstr "Bearbeiten"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "Never. This is a 'one time only' event."
+#~ msgstr "Nie. Dies ist ein einmaliger Termin."
 
 #~ msgid "Calendar metadata"
 #~ msgstr "Kalender-Metadaten"
