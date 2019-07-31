@@ -128,3 +128,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             (".".join(to_sign)).encode('utf-8'),
             digestmod=hashlib.md5
         ).hexdigest()
+
+    def send_mail(self, subject, body, **kwargs):
+        from .utils import send_mail_user
+        return send_mail_user(subject, body, self, **kwargs)
