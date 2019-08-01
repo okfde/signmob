@@ -130,6 +130,10 @@ class CollectionEventMember(models.Model):
         return '{} bei {}'.format(self.user, self.event)
 
 
+class CollectionEventManager(models.Manager):
+    pass
+
+
 class CollectionEvent(models.Model):
     name = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
@@ -146,6 +150,8 @@ class CollectionEvent(models.Model):
         Occurrence, null=True, on_delete=models.CASCADE
     )
     members = models.ManyToManyField(User, through=CollectionEventMember)
+
+    objects = CollectionEventManager()
 
     class Meta:
         verbose_name = 'Sammeltermin'
@@ -179,6 +185,15 @@ class CollectionEvent(models.Model):
 
     def get_domain_url(self):
         return settings.SITE_URL + self.get_absolute_url()
+
+    def get_non_attendees(self):
+        if not self.group:
+            return User.objects.none()
+        return User.objects.filter(
+            id__in=self.group.collectiongroupmember_set.exclude(
+                user__in=self.members.all()
+            ).values_list('user_id', flat=True)
+        )
 
 
 class CollectionResult(models.Model):

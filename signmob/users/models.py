@@ -116,6 +116,9 @@ class User(AbstractBaseUser, PermissionsMixin):
             "url": url
         })
 
+    def get_autologin_prefix(self):
+        return self.get_autologin_url('/')[:-1]
+
     def check_autologin_secret(self, secret):
         return constant_time_compare(self.generate_autologin_secret(), secret)
 

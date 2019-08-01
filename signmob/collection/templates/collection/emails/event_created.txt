@@ -1,0 +1,15 @@
+{% extends "emails/base.txt" %}
+
+{% block body %}{% autoescape off %}Hallo {{ user.name }}
+
+wir sammeln am {{ event.start | date:"DATE_FORMAT" }} wieder Unterschriften!
+
+Wenn du Zeit hast, trage dich doch bitte ein:
+
+{{ event.name }}
+
+{{ user.get_autologin_prefix }}{{ event.get_absolute_url }}
+
+Vielen Dank für Deine Unterstützung!
+
+{% endautoescape %}{% endblock %}

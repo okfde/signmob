@@ -1,0 +1,13 @@
+{% extends "emails/base.txt" %}
+
+{% block body %}{% autoescape off %}Hallo {{ user.name }}
+
+für morgen, den {{ event.start | date:"DATE_FORMAT" }}, hast du dich für einen Sammeltermin eingetragen!
+
+Hier findest du die Details:
+
+{{ user.get_autologin_prefix }}{{ event.get_absolute_url }}
+
+Vielen Dank für Deine Unterstützung!
+
+{% endautoescape %}{% endblock %}
