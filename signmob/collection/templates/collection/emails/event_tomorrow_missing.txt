@@ -1,6 +1,6 @@
 {% extends "emails/base.txt" %}
 
-{% block body %}{% autoescape off %}Hallo {{ user.name }}
+{% block body %}{% autoescape off %}Hallo {{ user.name }},
 
 deine Team {{ team.name }} sammelt morgen, den {{ event.start | date:"DATE_FORMAT" }}.
 

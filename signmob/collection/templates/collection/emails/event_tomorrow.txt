@@ -1,6 +1,6 @@
 {% extends "emails/base.txt" %}
 
-{% block body %}{% autoescape off %}Hallo {{ user.name }}
+{% block body %}{% autoescape off %}Hallo {{ user.name }},
 
 für morgen, den {{ event.start | date:"DATE_FORMAT" }}, hast du dich für einen Sammeltermin eingetragen!
 
