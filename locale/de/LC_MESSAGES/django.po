@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-31 17:37+0200\n"
-"PO-Revision-Date: 2019-07-31 17:39+0200\n"
+"POT-Creation-Date: 2019-08-02 13:14+0200\n"
+"PO-Revision-Date: 2019-08-02 13:15+0200\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -27,6 +27,162 @@ msgstr "%d E-Mails werden verschickt."
 #: signmob/templates/admin_utils/send_mail.html:8
 msgid "Send mail to users"
 msgstr "Sende E-Mail an ausgewählte Personen"
+
+#: signmob/collection/models.py:17 signmob/collection/models.py:103
+#: signmob/collection/models.py:132 signmob/collection/models.py:240
+msgid "user"
+msgstr "Nutzer*in"
+
+#: signmob/collection/models.py:19
+msgid "joined"
+msgstr "Beitrittsdatum"
+
+#: signmob/collection/models.py:20
+msgid "responsible"
+msgstr "verantwortlich"
+
+#: signmob/collection/models.py:23
+msgid "team member"
+msgstr "Teammitglied"
+
+#: signmob/collection/models.py:24
+msgid "team members"
+msgstr "Teammitglieder"
+
+#: signmob/collection/models.py:46 signmob/collection/models.py:85
+#: signmob/collection/models.py:154
+msgid "name"
+msgstr "Name"
+
+#: signmob/collection/models.py:47 signmob/collection/models.py:86
+#: signmob/collection/models.py:155
+#| msgid "Description"
+msgid "description"
+msgstr "Beschreibung"
+
+#: signmob/collection/models.py:48
+msgid "channel"
+msgstr "Kanal"
+
+#: signmob/collection/models.py:50 signmob/collection/models.py:89
+#: signmob/collection/models.py:157
+msgid "place"
+msgstr "Ort"
+
+#: signmob/collection/models.py:54 signmob/collection/models.py:172
+msgid "members"
+msgstr "Mitglieder"
+
+#: signmob/collection/models.py:59
+msgid "calendar"
+msgstr "Kalender"
+
+#: signmob/collection/models.py:65 signmob/collection/models.py:245
+msgid "team"
+msgstr "Team"
+
+#: signmob/collection/models.py:66
+msgid "teams"
+msgstr "Teams"
+
+#: signmob/collection/models.py:69
+msgid "Team {}"
+msgstr "Team {}"
+
+#: signmob/collection/models.py:88
+msgid "address"
+msgstr "Adresse"
+
+#: signmob/collection/models.py:91 signmob/collection/models.py:135
+#: signmob/collection/models.py:233
+msgid "start"
+msgstr "Beginnt"
+
+#: signmob/collection/models.py:92 signmob/collection/models.py:136
+#: signmob/collection/models.py:234
+msgid "end"
+msgstr "Ende"
+
+#: signmob/collection/models.py:94
+msgid "accumulation"
+msgstr "Sammelpunkt"
+
+#: signmob/collection/models.py:98
+msgid "opening hours"
+msgstr "Öffnungszeiten"
+
+#: signmob/collection/models.py:99
+msgid "email"
+msgstr "E-Mail"
+
+#: signmob/collection/models.py:105
+msgid "needs check"
+msgstr "Braucht Kontrolle"
+
+#: signmob/collection/models.py:106
+msgid "report"
+msgstr "Bericht"
+
+#: signmob/collection/models.py:109
+msgid "collection place"
+msgstr "Sammelort"
+
+#: signmob/collection/models.py:110
+msgid "collection places"
+msgstr "Sammelorte"
+
+#: signmob/collection/models.py:128 signmob/collection/models.py:178
+msgid "collection event"
+msgstr "Sammeltermin"
+
+#: signmob/collection/models.py:138
+msgid "note"
+msgstr "Notiz"
+
+#: signmob/collection/models.py:141 signmob/collection/models.py:142
+msgid "collection event member"
+msgstr "Sammelterminteilnehmer*in"
+
+#: signmob/collection/models.py:146
+msgid "{} at {}"
+msgstr "{} bei {}"
+
+#: signmob/collection/models.py:162
+msgid "group"
+msgstr "Team"
+
+#: signmob/collection/models.py:168 signmob/collection/models.py:253
+msgid "event"
+msgstr "Sammeltermin"
+
+#: signmob/collection/models.py:179
+msgid "collection events"
+msgstr "Sammeltermine"
+
+#: signmob/collection/models.py:184
+#, python-brace-format
+msgid "{date} - {end}: {name}"
+msgstr "{date} - {end} Uhr: {name}"
+
+#: signmob/collection/models.py:231
+msgid "amount"
+msgstr "Anzahl"
+
+#: signmob/collection/models.py:236
+msgid "comment"
+msgstr "Kommentar"
+
+#: signmob/collection/models.py:249
+msgid "location"
+msgstr "Sammelort"
+
+#: signmob/collection/models.py:257
+msgid "collection result"
+msgstr "Sammelergebnis"
+
+#: signmob/collection/models.py:258
+msgid "collection results"
+msgstr "Sammelergebnisse"
 
 #: signmob/templates/account/account_inactive.html:5
 #: signmob/templates/account/account_inactive.html:8
@@ -47,7 +203,7 @@ msgstr "E-Mail-Adressen"
 
 #: signmob/templates/account/email.html:13
 msgid "The following e-mail addresses are associated with your account:"
-msgstr "Die folgenden E-Mail-Adressen sind mit deinem Konto verknüpft"
+msgstr "Die folgenden E-Mail-Adressen sind mit deinem Konto verknüpft:"
 
 #: signmob/templates/account/email.html:27
 msgid "Verified"
@@ -515,7 +671,7 @@ msgstr "Handy-Nummer"
 
 #: signmob/users/models.py:77
 msgid "staff status"
-msgstr ""
+msgstr "Mitarbeiter*in"
 
 #: signmob/users/models.py:79
 msgid "Designates whether the user can log into this admin site."
@@ -523,7 +679,7 @@ msgstr ""
 
 #: signmob/users/models.py:82
 msgid "active"
-msgstr ""
+msgstr "aktiv"
 
 #: signmob/users/models.py:85
 msgid ""
@@ -545,7 +701,7 @@ msgstr "gelöscht"
 
 #: signmob/users/models.py:97
 msgid "Designates whether this user was deleted."
-msgstr "Ob der Nutzer gelöscht wurde"
+msgstr "Zeigt an, ob der Nutzer gelöscht wurde."
 
 #: signmob/users/models.py:100
 msgid "date left"
