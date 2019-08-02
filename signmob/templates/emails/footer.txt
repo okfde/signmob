@@ -1,5 +1,9 @@
-{% autoescape off %}--
+{% autoescape off %}
+Beste Grüße
+Volksentscheid Transparenz Orgabot
 
-Volksentscheid Transparenz
+--
+
+Volksentscheid Transparenz – ein Transparenzgesetz für Berlin
 https://volksentscheid-transparenz.de/
 {% endautoescape %}

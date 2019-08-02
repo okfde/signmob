@@ -8,7 +8,9 @@ from config.celery_app import app as celery_app
 from signmob.users.models import User
 from signmob.users.utils import send_template_email
 
-from .models import CollectionEvent, CollectionGroup, CollectionLocation
+from .models import (
+    CollectionEvent, CollectionGroup, CollectionGroupMember, CollectionLocation
+)
 from .slack import send_message
 
 
@@ -122,15 +124,27 @@ INTERVAL_HOURS = 1
 @celery_app.task
 def event_checker():
     now = timezone.now()
+
+    # starts tomorrow within one hour window
     start = now + timedelta(days=1)
     end = start + timedelta(hours=INTERVAL_HOURS)
-    # start tomorrow within one hour window
+
     events = CollectionEvent.objects.filter(
         event_occurence__start__gte=start,
         event_occurence__start__lt=end,
     )
     for event in events:
         announce_event_tomorrow(event)
+
+    # ended in the last hour
+    start = now
+    end = start + timedelta(hours=INTERVAL_HOURS)
+    events = CollectionEvent.objects.filter(
+        event_occurence__end__gte=start,
+        event_occurence__end__lt=end,
+    )
+    for event in events:
+        send_event_ended(event)
 
 
 def announce_event_tomorrow(event):
@@ -170,3 +184,30 @@ def announce_event_tomorrow(event):
                     'team': event.group
                 }
             )
+
+
+def send_event_ended(event):
+    already = set()
+    for member in event.collectioneventmember_set.all():
+        if member.user_id in already:
+            continue
+        already.add(member.user_id)
+        if event.group:
+            try:
+                group_member = CollectionGroupMember.objects.get(
+                    group=event.group,
+                    user=member.user
+                )
+            except CollectionGroupMember.DoesNotExist:
+                group_member = None
+
+        send_template_email(
+            user=member.user,
+            subject='Vielen Dank für deinen Einsatz heute!',
+            template='collection/emails/event_thanks.txt',
+            context={
+                'user': member.user,
+                'group_member': group_member,
+                'event': event
+            }
+        )

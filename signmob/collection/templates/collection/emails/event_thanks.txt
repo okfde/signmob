@@ -1,0 +1,20 @@
+{% extends "emails/base.txt" %}
+
+{% block body %}{% autoescape off %}Hallo {{ user.name }},
+
+vielen Dank für Deinen Einsatz heute!
+{% if group_member.responsible %}
+Hier kannst Du für unsere Statistik angeben, wie viel ihr heute gesammelt habt:
+
+{{ user.get_autologin_prefix }}{% url 'admin:collection_collectionresult_add' %}
+
+Bitte denk dran, die gesammelten Unterschriften abzugeben.
+
+Hier kannst du den nächsten Sammeltermin anlegen:
+{{ user.get_autologin_prefix }}{% url 'admin:schedule_event_changelist' %}
+
+{% else %}
+Wir schicken Dir eine Einladung zu den nächsten Terminenen.
+{% endif %}
+
+{% endautoescape %}{% endblock %}
