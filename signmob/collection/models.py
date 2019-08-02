@@ -246,11 +246,11 @@ class CollectionResult(models.Model):
     )
     location = models.ForeignKey(
         CollectionLocation, null=True, blank=True, on_delete=models.SET_NULL,
-        verbose_name=_('location')
+        verbose_name=_('collection location')
     )
     event = models.ForeignKey(
         CollectionEvent, null=True, blank=True, on_delete=models.SET_NULL,
-        verbose_name=_('event')
+        verbose_name=_('collection event')
     )
 
     class Meta:

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 13:14+0200\n"
-"PO-Revision-Date: 2019-08-02 13:15+0200\n"
+"POT-Creation-Date: 2019-08-02 17:50+0200\n"
+"PO-Revision-Date: 2019-08-02 17:51+0200\n"
 "Last-Translator: Stefan Wehrmeyer <stefan.wehrmeyer@okfn.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -56,7 +56,6 @@ msgstr "Name"
 
 #: signmob/collection/models.py:47 signmob/collection/models.py:86
 #: signmob/collection/models.py:155
-#| msgid "Description"
 msgid "description"
 msgstr "Beschreibung"
 
@@ -132,6 +131,7 @@ msgid "collection places"
 msgstr "Sammelorte"
 
 #: signmob/collection/models.py:128 signmob/collection/models.py:178
+#: signmob/collection/models.py:253
 msgid "collection event"
 msgstr "Sammeltermin"
 
@@ -151,9 +151,9 @@ msgstr "{} bei {}"
 msgid "group"
 msgstr "Team"
 
-#: signmob/collection/models.py:168 signmob/collection/models.py:253
+#: signmob/collection/models.py:168
 msgid "event"
-msgstr "Sammeltermin"
+msgstr "Termin"
 
 #: signmob/collection/models.py:179
 msgid "collection events"
@@ -173,7 +173,7 @@ msgid "comment"
 msgstr "Kommentar"
 
 #: signmob/collection/models.py:249
-msgid "location"
+msgid "collection location"
 msgstr "Sammelort"
 
 #: signmob/collection/models.py:257
@@ -706,6 +706,9 @@ msgstr "Zeigt an, ob der Nutzer gelöscht wurde."
 #: signmob/users/models.py:100
 msgid "date left"
 msgstr "Datum ausgetreten"
+
+#~ msgid "location"
+#~ msgstr "Sammelort"
 
 #~ msgid "Edit"
 #~ msgstr "Bearbeiten"
