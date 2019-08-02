@@ -1,0 +1,25 @@
+{% extends "collection/base.html" %}
+
+{% load i18n %}
+{% load leaflet_tags %}
+{% load scheduletags %}
+
+{% block container %}
+  {% for object in object_list %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">
+          <a target="_blank" href="{{ object.get_absolute_url }}">
+            Team {{ object.name }}
+          </a>
+        </h5>
+        {% if object.description %}
+          <p class="card-text">{{ object.description|linebreaksbr }}</p>
+          <a target="_blank" class="card-link" href="{{ object.get_absolute_url }}">
+            Zum Team {{ object.name }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

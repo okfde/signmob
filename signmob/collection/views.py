@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.views.generic import (
-    DetailView, CreateView, FormView, TemplateView
+    ListView, DetailView, CreateView, FormView, TemplateView
 )
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
@@ -23,6 +23,10 @@ from .utils import get_period
 
 class HomeView(TemplateView):
     template_name = 'collection/home.html'
+
+
+class CollectionGroupListView(ListView):
+    model = CollectionGroup
 
 
 class CollectionGroupDetailView(DetailView):

@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import (
     HomeView,
+    CollectionGroupListView,
     CollectionGroupDetailView, join_group,
     CollectionLocationCreateView, CollectionLocationReportView,
     CollectionEventJoinView, cancel_event_membership
@@ -11,6 +12,11 @@ from .views import (
 app_name = "collection"
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
+    path(
+        'sammelgruppen/embed/',
+        CollectionGroupListView.as_view(),
+        name='collectiongroup-detail'
+    ),
     path(
         'sammelgruppe/<int:pk>/',
         CollectionGroupDetailView.as_view(),
