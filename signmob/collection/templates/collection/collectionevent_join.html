@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load leaflet_tags %}
+{% load scheduletags %}
 {% load crispy_forms_tags %}
 {% load collection_tags %}
 
@@ -86,6 +87,18 @@
   
   {% if object.group and not is_group_member %}
     {% include "collection/_collectiongroup_join.html" with object=object.group %}
+  {% endif %}
+
+  {% if object.group and object.group.calendar %}
+    <h3>Terminübersicht der Sammelgruppe {{ object.group.name }}</h3>
+    <div class="row">
+      <div class="col-12">
+        {% month_table object.calendar period "regular"  %}
+      </div>
+      <div class="col-12">
+        {% month_table calendar period "regular" 1 %}
+      </div>
+    </div>
   {% endif %}
 
 {% endblock %}
