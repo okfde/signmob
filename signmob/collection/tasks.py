@@ -161,11 +161,11 @@ def announce_event_tomorrow(event):
 
         for user in users:
             send_template_email(
-                user=member.user,
+                user=user,
                 subject='Spontan Zeit für den Volksentscheid Transparenz?',
                 template='collection/emails/event_tomorrow_missing.txt',
                 context={
-                    'user': member.user,
+                    'user': user,
                     'event': event,
                     'team': event.group
                 }
