@@ -150,7 +150,7 @@ class CollectionEventJoinView(FormView):
                 context['date'] = timezone.now()
                 context['period'] = get_period(context['object'].group.calendar)
         if self.request.user.is_authenticated:
-            context['first_time'] = not CollectionEventMember.objects.filter(
+            context['first_time'] = CollectionEventMember.objects.filter(
                 user=self.request.user
             ).count() < 2
         return context
