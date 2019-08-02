@@ -127,7 +127,7 @@ class CollectionGroupAdmin(SendMailMixin, LeafletGeoAdmin):
 
 
 class CollectionGroupMemberAdmin(SendMailMixin, admin.ModelAdmin):
-    list_display = ('user', 'group', 'joined')
+    list_display = ('user', 'group', 'joined', 'responsible')
     list_filter = ('responsible', 'group',)
     date_hierarchy = 'joined'
     actions = ['send_mail']
@@ -149,7 +149,23 @@ class CollectionEventMemberAdmin(SendMailMixin, admin.ModelAdmin):
 
 
 class CollectionResultAdmin(admin.ModelAdmin):
-    pass
+    fieldsets = (
+        ('Wie viel wurde gesammelt?', {
+            'fields': (
+                'amount',
+                'comment',
+            )
+        }),
+        ('Wann wurde gesammelt?', {
+            'fields': ('event', 'start', 'end'),
+        }),
+        ('Von wem wurde gesammelt?', {
+            'fields': ('group', 'user',),
+        }),
+        ('Falls es ein fester Sammelort war', {
+            'fields': ('location',),
+        }),
+    )
 
 
 admin.site.register(CollectionGroup, CollectionGroupAdmin)
