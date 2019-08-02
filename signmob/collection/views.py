@@ -142,6 +142,9 @@ class CollectionEventJoinView(FormView):
             context['is_group_member'] = bool(self.request.user in (
                 m.user for m in context['object'].group.collectiongroupmember_set.all()
             ))
+            if context['object'].group.calendar:
+                context['date'] = timezone.now()
+                context['period'] = get_period(context['object'].group.calendar)
         return context
 
     def get_form_kwargs(self):

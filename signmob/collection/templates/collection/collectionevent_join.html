@@ -93,10 +93,10 @@
     <h3>Terminübersicht der Sammelgruppe {{ object.group.name }}</h3>
     <div class="row">
       <div class="col-12">
-        {% month_table object.calendar period "regular"  %}
+        {% month_table object.group.calendar period "regular"  %}
       </div>
       <div class="col-12">
-        {% month_table calendar period "regular" 1 %}
+        {% month_table object.group.calendar period "regular" 1 %}
       </div>
     </div>
   {% endif %}
