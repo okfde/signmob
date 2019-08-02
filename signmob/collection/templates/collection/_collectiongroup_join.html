@@ -18,6 +18,12 @@
         Du möchtest beim Sammeln der Unterschriften in dieser Gruppe helfen?
         Tritt der Gruppe bei und wir informieren dich über anstehende Termine.
       </p>
+      <p>
+        Wir geben dir auch eine Einführung in das Thema Transparenzgesetz und Material, damit du gut vorbereitet bist.
+        <a href="https://volksentscheid-transparenz.de/info/sammeln/" target="_blank">
+          Hier findest du alle Infos für Sammler*innen.
+        </a>
+      </p>
       <form method="post" action="{% url 'collection:collectiongroup-join' pk=object.pk %}">
         {% csrf_token %}
         {% get_signup_form as signup_form %}

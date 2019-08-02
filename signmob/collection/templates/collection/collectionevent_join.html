@@ -38,6 +38,16 @@
     </div>
   </div>
 
+  {% if request.user.is_authenticated and first_time %}
+    <h3>Dein erster Sammeltermin?</h3>
+    <p>
+      Die Teamverantwortlichen geben Dir gerne eine Einführung in das Thema Transparenzgesetz, damit du gut vorbereitet bist.
+    </p>
+    <p>
+      Wir stellen natürlich Material bereit. <a href="https://volksentscheid-transparenz.de/info/sammeln/" target="_blank">>Hier findest du alle Infos.</a>
+    </p>
+  {% endif %}
+
   {% if request.user.is_authenticated and members %}
     <h3>Bestätigte Teilnehmende</h3>
     {% get_event_gantt_chart object members request.user as gant_members %}
