@@ -21,6 +21,7 @@ class UserCreationForm(auth_forms.UserCreationForm):
 class CustomSignupForm(SignupForm):
     name = forms.CharField(
         label='Name',
+        help_text='Dein Name ist sichtbar für andere Aktive. Du kannst auch nur deinen Vornamen oder Spitznamen verwenden.',
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'Dein Name',
