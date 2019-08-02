@@ -88,11 +88,11 @@ def message_event_created(event):
         send_message(message, group=event.group)
 
     else:
-        message = 'Team {team} hat den nächsten Sammeltermin: <{url}|{date}>'.format(
-            team=event.group.name, url=event.get_domain_url(),
+        message = 'Neuer Sammeltermin: <{url}|{date}>'.format(
+            url=event.get_domain_url(),
             date=formats.date_format(event.start, 'SHORT_DATE_FORMAT')
         )
-        send_message(message, group=event.group)
+        send_message(message, group=None)
 
     if event.group:
         subject = 'Team {name} hat eine neuen Sammeltermin: {date}'.format(
