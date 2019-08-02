@@ -6,10 +6,14 @@
   {{ block.super }}
   {% if original.pk %}
     <div>
+      <h3>Neuen Sammeltermin anlegen</h3>
       <form method="post" action="{% url 'admin:collection-collectionevent-create_from_event' event_id=original.pk %}">
       {% csrf_token %}
         {% if original.rule %}
-          <input type="date" name="date" value=""/>
+          <label>
+            Datum:
+            <input type="date" name="date" value=""/>
+          </label>
         {% endif %}
         
         <input type="submit" value="Neuen Sammeltermin anlegen"/>
