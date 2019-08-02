@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.formats import date_format
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from schedule.models import Calendar, Occurrence, Event
 
@@ -12,13 +13,15 @@ from signmob.users.models import User
 
 class CollectionGroupMember(models.Model):
     group = models.ForeignKey("CollectionGroup", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    joined = models.DateTimeField(default=timezone.now)
-    responsible = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        User, verbose_name=_('user'),
+        on_delete=models.CASCADE)
+    joined = models.DateTimeField(_('joined'), default=timezone.now)
+    responsible = models.BooleanField(_('responsible'), default=False)
 
     class Meta:
-        verbose_name = 'Teammitglied'
-        verbose_name_plural = 'Teammitglieder'
+        verbose_name = _('team member')
+        verbose_name_plural = _('team members')
         unique_together = ['group', 'user']
 
     def __str__(self):
@@ -40,26 +43,30 @@ class CollectionGroupManager(models.Manager):
 
 
 class CollectionGroup(models.Model):
-    name = models.CharField(max_length=255, blank=True)
-    description = models.TextField(blank=True)
-    channel = models.CharField(max_length=255, blank=True)
+    name = models.CharField(_('name'), max_length=255, blank=True)
+    description = models.TextField(_('description'), blank=True)
+    channel = models.CharField(_('channel'), max_length=255, blank=True)
 
-    geo = models.PointField(null=True, blank=True, geography=True)
+    geo = models.PointField(_('place'), null=True, blank=True, geography=True)
 
-    members = models.ManyToManyField(User, through=CollectionGroupMember)
+    members = models.ManyToManyField(
+        User, through=CollectionGroupMember,
+        verbose_name=_('members')
+    )
 
     calendar = models.ForeignKey(
-        Calendar, null=True, blank=True, on_delete=models.SET_NULL
+        Calendar, null=True, blank=True, on_delete=models.SET_NULL,
+        verbose_name=_('calendar')
     )
 
     objects = CollectionGroupManager()
 
     class Meta:
-        verbose_name = 'Team'
-        verbose_name_plural = 'Teams'
+        verbose_name = _('team')
+        verbose_name_plural = _('teams')
 
     def __str__(self):
-        return 'Team {}'.format(self.name)
+        return _('Team {}').format(self.name)
 
     def get_absolute_url(self):
         return reverse('collection:collectiongroup-detail', kwargs={'pk': self.pk})
@@ -75,29 +82,32 @@ class CollectionGroup(models.Model):
 
 
 class CollectionLocation(models.Model):
-    name = models.CharField(max_length=255, blank=True)
-    description = models.TextField(blank=True)
+    name = models.CharField(_('name'), max_length=255, blank=True)
+    description = models.TextField(_('description'), blank=True)
 
-    address = models.TextField(blank=True)
-    geo = models.PointField(null=True, blank=True, geography=True)
+    address = models.TextField(_('address'), blank=True)
+    geo = models.PointField(_('place'), null=True, blank=True, geography=True)
 
-    start = models.DateField(null=True, blank=True)
-    end = models.DateField(null=True, blank=True)
+    start = models.DateField(_('start'), null=True, blank=True)
+    end = models.DateField(_('end'), null=True, blank=True)
 
-    accumulation = models.BooleanField(default=False)
+    accumulation = models.BooleanField(_('accumulation'), default=False)
 
-    events = models.ManyToManyField(Event, blank=True)
-    email = models.EmailField(blank=True)
+    events = models.ManyToManyField(
+        Event, blank=True,
+        verbose_name=_('opening hours'))
+    email = models.EmailField(_('email'), blank=True)
     user = models.ForeignKey(
         User, blank=True, null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_('user')
     )
-    needs_check = models.BooleanField(default=False)
-    report = models.TextField(blank=True)
+    needs_check = models.BooleanField(_('needs check'), default=False)
+    report = models.TextField(_('report'), blank=True)
 
     class Meta:
-        verbose_name = 'Sammelort'
-        verbose_name_plural = 'Sammelorte'
+        verbose_name = _('collection place')
+        verbose_name_plural = _('collection places')
 
     def __str__(self):
         return self.name
@@ -113,21 +123,27 @@ class CollectionLocation(models.Model):
 
 
 class CollectionEventMember(models.Model):
-    event = models.ForeignKey("CollectionEvent", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(
+        "CollectionEvent", on_delete=models.CASCADE,
+        verbose_name=_('collection event')
+    )
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE,
+        verbose_name=_('user')
+    )
 
-    start = models.DateTimeField(null=True, blank=True)
-    end = models.DateTimeField(null=True, blank=True)
+    start = models.DateTimeField(_('start'), null=True, blank=True)
+    end = models.DateTimeField(_('end'), null=True, blank=True)
 
-    note = models.TextField(blank=True)
+    note = models.TextField(_('note'), blank=True)
 
     class Meta:
-        verbose_name = 'Sammelterminteilnehmer/in'
-        verbose_name_plural = 'Sammelterminteilnehmende'
+        verbose_name = _('collection event member')
+        verbose_name_plural = _('collection event member')
         ordering = ('start', '-end')
 
     def __str__(self):
-        return '{} bei {}'.format(self.user, self.event)
+        return _('{} at {}').format(self.user, self.event)
 
 
 class CollectionEventManager(models.Manager):
@@ -135,50 +151,65 @@ class CollectionEventManager(models.Manager):
 
 
 class CollectionEvent(models.Model):
-    name = models.CharField(max_length=255, blank=True)
-    description = models.TextField(blank=True)
+    name = models.CharField(_('name'), max_length=255, blank=True)
+    description = models.TextField(_('description'), blank=True)
 
-    geo = models.PointField(null=True, blank=True, geography=True)
+    geo = models.PointField(_('place'), null=True, blank=True, geography=True)
 
     group = models.ForeignKey(
         CollectionGroup, null=True, blank=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_('group')
     )
 
     # FIXME: spelling
     event_occurence = models.ForeignKey(
-        Occurrence, null=True, on_delete=models.CASCADE
+        Occurrence, null=True, on_delete=models.CASCADE,
+        verbose_name=_('event')
     )
-    members = models.ManyToManyField(User, through=CollectionEventMember)
+    members = models.ManyToManyField(
+        User, through=CollectionEventMember,
+        verbose_name=_('members')
+    )
 
     objects = CollectionEventManager()
 
     class Meta:
-        verbose_name = 'Sammeltermin'
-        verbose_name_plural = 'Sammeltermine'
+        verbose_name = _('collection event')
+        verbose_name_plural = _('collection events')
 
     def __str__(self):
-        return self.name
+        if not self.event_occurence:
+            return self.name
+        return _('{date} - {end}: {name}').format(
+            date=date_format(self.start, "SHORT_DATETIME_FORMAT"),
+            end=date_format(self.end, "TIME_FORMAT"),
+            name=self.name
+        )
 
     @property
     def start(self):
-        return self.event_occurence.start
+        if self.event_occurence:
+            return self.event_occurence.start
 
     @property
     def end(self):
-        return self.event_occurence.end
+        if self.event_occurence:
+            return self.event_occurence.end
 
     @property
     def start_time(self):
-        tz = timezone.get_current_timezone()
-        local_time = self.event_occurence.start.astimezone(tz)
-        return date_format(local_time, "SHORT_DATETIME_FORMAT")
+        if self.event_occurence:
+            tz = timezone.get_current_timezone()
+            local_time = self.event_occurence.start.astimezone(tz)
+            return date_format(local_time, "SHORT_DATETIME_FORMAT")
 
     @property
     def end_time(self):
-        tz = timezone.get_current_timezone()
-        local_time = self.event_occurence.end.astimezone(tz)
-        return date_format(local_time, "SHORT_DATETIME_FORMAT")
+        if self.event_occurence:
+            tz = timezone.get_current_timezone()
+            local_time = self.event_occurence.end.astimezone(tz)
+            return date_format(local_time, "SHORT_DATETIME_FORMAT")
 
     def get_absolute_url(self):
         return reverse('collection:collectionevent-join', kwargs={'pk': self.pk})
@@ -197,28 +228,34 @@ class CollectionEvent(models.Model):
 
 
 class CollectionResult(models.Model):
-    amount = models.IntegerField(default=0)
+    amount = models.IntegerField(_('amount'), default=0)
 
-    start = models.DateTimeField(null=True, blank=True)
-    end = models.DateTimeField(null=True, blank=True)
+    start = models.DateTimeField(_('start'), null=True, blank=True)
+    end = models.DateTimeField(_('end'), null=True, blank=True)
 
-    comment = models.TextField(blank=True)
+    comment = models.TextField(_('comment'), blank=True)
 
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(
+        User, blank=True, null=True, on_delete=models.SET_NULL,
+        verbose_name=_('user')
+    )
 
     group = models.ForeignKey(
-        CollectionGroup, null=True, blank=True, on_delete=models.SET_NULL
+        CollectionGroup, null=True, blank=True, on_delete=models.SET_NULL,
+        verbose_name=_('team')
     )
     location = models.ForeignKey(
-        CollectionLocation, null=True, blank=True, on_delete=models.SET_NULL
+        CollectionLocation, null=True, blank=True, on_delete=models.SET_NULL,
+        verbose_name=_('location')
     )
     event = models.ForeignKey(
-        CollectionEvent, null=True, blank=True, on_delete=models.SET_NULL
+        CollectionEvent, null=True, blank=True, on_delete=models.SET_NULL,
+        verbose_name=_('event')
     )
 
     class Meta:
-        verbose_name = 'Sammelergebnis'
-        verbose_name_plural = 'Sammelergebnisse'
+        verbose_name = _('collection result')
+        verbose_name_plural = _('collection results')
 
     def __str__(self):
         return '{} ({} - {})'.format(self.amount, self.start, self.end)
