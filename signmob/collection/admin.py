@@ -30,6 +30,9 @@ class CollectionEventAdmin(SendMailMixin, LeafletGeoAdmin):
     inlines = [CollectionEventMemberInline]
     save_on_top = True
     readonly_fields = ('start_time', 'end_time', 'group')
+    list_display = ('name', 'start', 'end', 'group')
+    list_filter = ('group',)
+    date_hierarchy = 'event_occurence__start'
     fieldsets = (
         (None, {
             'fields': (
@@ -43,6 +46,11 @@ class CollectionEventAdmin(SendMailMixin, LeafletGeoAdmin):
         }),
     )
     actions = ['send_mail']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.select_related('event_occurence', 'group')
+        return qs
 
     def get_urls(self):
         urls = super().get_urls()
