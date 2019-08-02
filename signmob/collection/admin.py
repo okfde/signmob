@@ -29,7 +29,7 @@ class CollectionEventAdmin(SendMailMixin, LeafletGeoAdmin):
     display_raw = False
     inlines = [CollectionEventMemberInline]
     save_on_top = True
-    readonly_fields = ('start_time', 'end_time', 'group')
+    readonly_fields = ('start_time', 'end_time',)
     list_display = ('name', 'start', 'end', 'group')
     list_filter = ('group',)
     date_hierarchy = 'event_occurence__start'
