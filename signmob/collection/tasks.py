@@ -70,7 +70,7 @@ def group_joined_task(user_id, group_id):
 
 
 @celery_app.task
-def event_created_task(user_id, event_id):
+def event_created_task(event_id):
     try:
         event = CollectionEvent.objects.get(id=event_id)
     except CollectionGroup.DoesNotExist:

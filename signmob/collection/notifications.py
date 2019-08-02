@@ -19,7 +19,7 @@ def trigger_event_created(sender, instance=None, created=False, **kwargs):
         return
     if not created:
         return
-    event_created.send(sender=CollectionEvent, user=None, event=instance)
+    event_created.send(sender=CollectionEvent, event=instance)
 
 
 @receiver(location_created)
@@ -38,5 +38,5 @@ def notify_group_joined(sender, user, group, **kwargs):
 
 
 @receiver(event_created)
-def notify_event_created(sender, user, event, **kwargs):
-    event_created_task.delay(user.id, event.id)
+def notify_event_created(sender, event, **kwargs):
+    event_created_task.delay(event.id)
