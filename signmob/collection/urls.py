@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from .views import (
     HomeView,
@@ -14,7 +15,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path(
         'sammelgruppen/embed/',
-        CollectionGroupListView.as_view(),
+        xframe_options_exempt(CollectionGroupListView.as_view()),
         name='collectiongroup-detail'
     ),
     path(
