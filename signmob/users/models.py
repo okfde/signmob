@@ -105,6 +105,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
+    backend = settings.AUTHENTICATION_BACKENDS[0]
 
     def __str__(self):
         return self.name
