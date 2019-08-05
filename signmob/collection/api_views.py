@@ -106,6 +106,7 @@ class CollectionViewSet(viewsets.ViewSet):
         )
 
         now = timezone.now()
+        now_date = now.astimezone(timezone.get_current_timezone()).date()
         two_weeks = now + timedelta(days=15)
         events = (
             CollectionEvent.objects.filter(
@@ -123,8 +124,8 @@ class CollectionViewSet(viewsets.ViewSet):
         )
         locations = (
             CollectionLocation.objects.filter(
-                (Q(end=None) | Q(end__gt=now))
-                & Q(start__lt=now)
+                (Q(end=None) | Q(end__gte=now_date))
+                & Q(start__lte=now_date)
             )
             .annotate(
                 _address=F('address'),
