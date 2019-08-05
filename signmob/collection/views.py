@@ -34,7 +34,11 @@ class CollectionGroupDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['events'] = CollectionEvent.objects.filter(group=self.object)
+        now = timezone.now()
+        context['events'] = CollectionEvent.objects.filter(
+            group=self.object,
+            event_occurence__end__gte=now
+        ).order_by('event_occurence__start')
 
         user = self.request.user
         if user.is_authenticated:
@@ -51,7 +55,7 @@ class CollectionGroupDetailView(DetailView):
         context['member_count'] = context['members'].count()
 
         if self.object.calendar:
-            context['date'] = timezone.now()
+            context['date'] = now
             context['period'] = get_period(self.object.calendar)
 
         return context
