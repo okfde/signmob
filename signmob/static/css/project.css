@@ -8471,3 +8471,6 @@ td.has-occurence a, td.has-occurence a:hover {
 
 .glyphicon.glyphicon-circle-arrow-left::after {
   content: "<-"; }
+
+.invalid-feedback {
+  display: block !important; }
