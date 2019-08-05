@@ -104,6 +104,13 @@ class CollectionLocationCreateView(CreateView):
         )
         return redirect(self.get_success_url())
 
+    def form_invalid(self, form):
+        messages.add_message(
+            self.request, messages.ERROR,
+            'Bitte gib alle notwendigen Informationen an.'
+        )
+        return super().form_invalid(form)
+
     def get_success_url(self):
         return reverse('collection:home')
 

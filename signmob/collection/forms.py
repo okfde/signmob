@@ -61,7 +61,10 @@ class CollectionLocationForm(forms.ModelForm):
         help_text=(
             'Bitte zoom an den Ort heran. Dann klicke links auf den Marker und setze ihn möglichst '
             'genau auf den Ort der Unterschriftenliste.'
-        )
+        ),
+        error_messages={
+            'required': 'Bitte setze einen Marker: klick auf das Symobl an der linken Seite!',
+        },
     )
     email = forms.EmailField(
         label='Deine E-Mail-Adresse',
