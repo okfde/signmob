@@ -14,7 +14,7 @@ Hier kannst du den nächsten Sammeltermin anlegen:
 {{ user.get_autologin_prefix }}{% url 'admin:schedule_event_changelist' %}
 
 {% else %}
-Wir schicken Dir eine Einladung zu den nächsten Terminenen.
+Wir schicken Dir eine Einladung zu den nächsten Terminen.
 {% endif %}
 
 {% endautoescape %}{% endblock %}
