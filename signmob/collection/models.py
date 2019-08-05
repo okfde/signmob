@@ -177,6 +177,7 @@ class CollectionEvent(models.Model):
     class Meta:
         verbose_name = _('collection event')
         verbose_name_plural = _('collection events')
+        ordering = ('-event_occurence__start',)
 
     def __str__(self):
         if not self.event_occurence:
