@@ -46,7 +46,7 @@
     <h3>Gruppenmitglieder</h3>
     <ul>
       {% for member in members %}
-        <li>{{ member.user }} {% if member.responsible %}<span class="badge badge-secondary">*</span>{% endif %}</li>
+        <li>{{ member.user }} {% if member.responsible %}<span class="badge badge-secondary" title="Verantwortlich">*</span>{% endif %}</li>
       {% endfor %}
     </ul>
   {% endif %}
