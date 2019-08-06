@@ -17,10 +17,6 @@ class SendMailMixin():
 
         """
 
-        # Check that the user has change permission for the actual model
-        if not request.user.is_superuser:
-            raise PermissionDenied
-
         user_ids = self._get_send_mail_user_ids(queryset)
         if request.POST.get('subject'):
             subject = request.POST.get('subject', '')
