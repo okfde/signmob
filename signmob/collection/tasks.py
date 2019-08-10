@@ -192,6 +192,7 @@ def send_event_ended(event):
         if member.user_id in already:
             continue
         already.add(member.user_id)
+        group_member = None
         if event.group:
             try:
                 group_member = CollectionGroupMember.objects.get(
@@ -199,7 +200,7 @@ def send_event_ended(event):
                     user=member.user
                 )
             except CollectionGroupMember.DoesNotExist:
-                group_member = None
+                pass
 
         send_template_email(
             user=member.user,
