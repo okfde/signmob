@@ -13,7 +13,7 @@ from signmob.users.models import User
 
 def new_occurrence_hash(self):
     # monkey patch for Unhashable Type Occurrence
-    return hash((self.original_start, self.original_end))
+    return hash((self.event_id, self.original_start, self.original_end))
 
 
 Occurrence.__hash__ = new_occurrence_hash
