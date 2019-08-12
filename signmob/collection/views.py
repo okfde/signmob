@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.utils.decorators import method_decorator
 
 from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
@@ -15,7 +17,9 @@ from .models import (
     CollectionLocation, CollectionEventMember
 )
 from .forms import (
-    GroupSignupForm, CollectionLocationForm, CollectionLocationReportForm,
+    GroupSignupForm,
+    CollectionLocationForm, CollectionLocationOrderForm,
+    CollectionLocationReportForm,
     CollectionEventJoinForm
 )
 from .utils import get_period
@@ -117,6 +121,32 @@ class CollectionLocationCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('collection:home')
+
+
+@method_decorator(xframe_options_exempt, name='dispatch')
+class CollectionLocationOrderView(CreateView):
+    template_name = 'collection/collectionlocation_order.html'
+    model = CollectionLocation
+    form_class = CollectionLocationOrderForm
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save(self.request)
+        messages.add_message(
+            self.request, messages.SUCCESS,
+            'Vielen Dank! Wir senden Dir ein Paket so schnell wie möglich zu!'
+        )
+        return redirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        messages.add_message(
+            self.request, messages.ERROR,
+            'Bitte gib alle notwendigen Informationen an.'
+        )
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('collection:collectionlocation-order-thanks')
 
 
 class CollectionLocationReportView(FormView):

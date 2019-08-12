@@ -1,0 +1,41 @@
+{% extends "collection/base.html" %}
+
+{% load i18n %}
+{% load leaflet_tags %}
+{% load crispy_forms_tags %}
+
+{% block container %}
+
+  <div class="card">
+      <div class="card-header">
+      <h3>Bestelle ein Unterschriftenpaket!</h3>
+      </div>
+      <div class="card-body">
+      <p class="lead">
+        Du willst Unterschriftenlisten bei dir vor Ort auslegen?
+        Wir schicken Dir Unterschriftenlisten mit Aufsteller!
+      </p>
+      <p>
+        Wenn du einfach nur Unterschriftenlisten willst kannst du sie <a href="https://volksentscheid-transparenz.de/mitmachen/" target="_blank">dir herunterladen</a> oder uns eine E-Mail schreiben.
+      </p>
+      <form method="post" action="">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button class="btn btn-primary" type="submit">Jetzt bestellen &raquo;</button>
+      </form>
+      </div>
+  </div>
+{% endblock %}
+
+{% block css %}
+  {{ block.super }}
+  {% leaflet_css plugins="forms" %}
+{% endblock %}
+
+{% block javascript %}
+  {{ block.super }}
+  {% leaflet_js plugins="forms" %}
+  <script>
+    {% include "leaflet/_leaflet_image_path.html" %}
+  </script>
+{% endblock %}

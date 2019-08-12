@@ -13,7 +13,10 @@ from .models import (
     CollectionGroupMember, CollectionLocation,
     CollectionEventMember
 )
-from .signals import group_joined, location_created, location_reported
+from .signals import (
+    group_joined, location_created, location_reported,
+    material_requested
+)
 
 
 class GroupSignupForm(CustomSignupForm):
@@ -87,6 +90,29 @@ class CollectionLocationForm(forms.ModelForm):
         obj.save()
 
         location_created.send(
+            sender=obj.__class__,
+            location=obj,
+        )
+
+        return obj
+
+
+class CollectionLocationOrderForm(CollectionLocationForm):
+    email = forms.EmailField(
+        label='Deine E-Mail-Adresse',
+        help_text='Falls wir Rückfragen haben, können wir dich kontaktieren.',
+        required=True
+    )
+
+    def save(self, request):
+        obj = super(CollectionLocationForm, self).save(commit=False)
+        if request.user.is_authenticated:
+            obj.user = request.user
+
+        obj.send_material = True
+        obj.save()
+
+        material_requested.send(
             sender=obj.__class__,
             location=obj,
         )

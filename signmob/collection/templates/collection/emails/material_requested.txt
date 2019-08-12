@@ -1,0 +1,15 @@
+{% extends "emails/base.txt" %}
+
+{% block body %}{% autoescape off %}Hallo {{ user.name }},
+
+jemand hat Material bestellt!
+
+{{ location.name }}
+{{ location.address }}
+
+Sobald das Material verschickt wurde, bitte den Ort freischalten, in dem ein Startzeitpunkt gesetzt wird:
+
+{{ user.get_autologin_prefix }}{% url 'admin:collection_collectionlocation_change' location.id %}
+
+
+{% endautoescape %}{% endblock %}

@@ -1,8 +1,11 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
 from leaflet.admin import LeafletGeoAdmin
 
 from schedule.admin import EventAdmin
@@ -18,6 +21,7 @@ from .models import (
     CollectionEventMember,
     CollectionGroupMember,
 )
+from .tasks import material_sent_task
 from .utils import get_occurrence
 
 
@@ -107,8 +111,27 @@ class CollectionEventAdmin(SendMailMixin, LeafletGeoAdmin):
 class CollectionLocationAdmin(LeafletGeoAdmin):
     display_raw = True
     raw_id_fields = ('events',)
-    list_display = ('name', 'address', 'start', 'end', 'needs_check',)
-    list_filter = ('needs_check', 'accumulation')
+    date_hierarchy = 'start'
+    list_display = (
+        'name', 'address', 'start', 'end', 'needs_check',
+        'send_material'
+    )
+    list_filter = (
+        'needs_check', 'accumulation',
+        'start',
+    )
+    actions = ['set_material_sent']
+
+    def set_material_sent(self, request, queryset):
+        count = 0
+        for loc in queryset.filter(send_material=True, start__isnull=True):
+            loc.start = timezone.now().date() + timedelta(days=1)
+            loc.save()
+            if loc.email:
+                count += 1
+                material_sent_task.delay(loc.id)
+        self.message_user(request, _("%d emails sent to location owners.") % count)
+    set_material_sent.short_description = _('Send material delivery notification')
 
 
 class CollectionGroupMemberInline(admin.StackedInline):

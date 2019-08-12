@@ -34,6 +34,47 @@ def location_created_task(location_id):
 
 
 @celery_app.task
+def material_requested_task(location_id):
+    try:
+        location = CollectionLocation.objects.get(id=location_id)
+    except CollectionLocation.DoesNotExist:
+        return
+
+    users = User.objects.filter(groups__name='Material')
+
+    for user in users:
+        send_template_email(
+            user=user,
+            subject='Material angefordert',
+            template='collection/emails/material_requested.txt',
+            context={
+                'user': user,
+                'location': location
+            }
+        )
+
+
+@celery_app.task
+def material_sent_task(location_id):
+    try:
+        location = CollectionLocation.objects.get(id=location_id)
+    except CollectionLocation.DoesNotExist:
+        return
+
+    if not location.email:
+        return
+
+    send_template_email(
+        email=location.email,
+        subject='Volksentscheid Transparenz: Material versandt!',
+        template='collection/emails/material_sent.txt',
+        context={
+            'location': location
+        }
+    )
+
+
+@celery_app.task
 def location_reported_task(location_id):
     try:
         location = CollectionLocation.objects.get(id=location_id)

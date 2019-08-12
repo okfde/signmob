@@ -1,0 +1,12 @@
+{% extends "emails/base.txt" %}
+
+{% block body %}{% autoescape off %}Hallo!
+
+Das von dir bestellt Material zum Volksentscheid Transparenz wurde heute versendet an:
+
+{{ location.name }}
+{{ location.address }}
+
+Bitte melde dich, solltest du in den nächsten Tagen nichts erhalten.
+
+{% endautoescape %}{% endblock %}

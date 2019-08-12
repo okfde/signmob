@@ -1,11 +1,13 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 from .views import (
     HomeView,
     CollectionGroupListView,
     CollectionGroupDetailView, join_group,
-    CollectionLocationCreateView, CollectionLocationReportView,
+    CollectionLocationCreateView, CollectionLocationOrderView,
+    CollectionLocationReportView,
     CollectionEventJoinView, cancel_event_membership
 )
 
@@ -33,6 +35,18 @@ urlpatterns = [
         'sammelort/erstellen/',
         CollectionLocationCreateView.as_view(),
         name='collectionlocation-create'
+    ),
+    path(
+        'sammelort/bestellen/',
+        CollectionLocationOrderView.as_view(),
+        name='collectionlocation-order'
+    ),
+    path(
+        'sammelort/bestellen/danke/',
+        TemplateView.as_view(
+            template_name='collection/collectionlocation_order_thanks.html'
+        ),
+        name='collectionlocation-order-thanks'
     ),
     path(
         'sammelort/<int:pk>/melden/',
