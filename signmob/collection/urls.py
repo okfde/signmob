@@ -38,14 +38,14 @@ urlpatterns = [
     ),
     path(
         'sammelort/bestellen/',
-        CollectionLocationOrderView.as_view(),
+        xframe_options_exempt(CollectionLocationOrderView.as_view()),
         name='collectionlocation-order'
     ),
     path(
         'sammelort/bestellen/danke/',
-        TemplateView.as_view(
+        xframe_options_exempt(TemplateView.as_view(
             template_name='collection/collectionlocation_order_thanks.html'
-        ),
+        )),
         name='collectionlocation-order-thanks'
     ),
     path(

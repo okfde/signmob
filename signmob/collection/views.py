@@ -6,8 +6,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.clickjacking import xframe_options_exempt
-from django.utils.decorators import method_decorator
 
 from allauth.account.utils import complete_signup
 from allauth.exceptions import ImmediateHttpResponse
@@ -123,7 +121,6 @@ class CollectionLocationCreateView(CreateView):
         return reverse('collection:home')
 
 
-@method_decorator(xframe_options_exempt, name='dispatch')
 class CollectionLocationOrderView(CreateView):
     template_name = 'collection/collectionlocation_order.html'
     model = CollectionLocation
