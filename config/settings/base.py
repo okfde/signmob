@@ -358,3 +358,5 @@ SLACK_WEBHOOK_URL = env('SLACK_WEBHOOK_URL', default='')
 SLACK_DEFAULT_CHANNEL = '#transparenzgesetz-mob'
 SLACK_LEGACY_TOKEN = env('SLACK_LEGACY_TOKEN', default='')
 SLACK_INVITE_CHANNELS = 'CD1626GNA'
+
+CONTACT_EMAIL = 'info@volksentscheid-transparenz.de'

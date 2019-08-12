@@ -3,11 +3,14 @@ from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
+from django.views.generic import TemplateView
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from rest_framework.routers import DefaultRouter
 
 from signmob.collection.api_views import CollectionViewSet
 from signmob.users.views import link_login
+from signmob.views import ContactView
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -28,6 +31,18 @@ urlpatterns = [
         link_login, name='link_login'
     ),
     path("accounts/", include("allauth.urls")),
+    path(
+        'kontakt/',
+        xframe_options_exempt(ContactView.as_view()),
+        name='contact'
+    ),
+    path(
+        'kontakt/danke/',
+        xframe_options_exempt(TemplateView.as_view(
+            template_name='contact_thanks.html'
+        )),
+        name='contact-thanks'
+    ),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
