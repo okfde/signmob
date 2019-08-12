@@ -11,6 +11,14 @@ from schedule.models import Calendar, Occurrence, Event
 from signmob.users.models import User
 
 
+def new_occurrence_hash(self):
+    # monkey patch for Unhashable Type Occurrence
+    return hash((self.original_start, self.original_end))
+
+
+Occurrence.__hash__ = new_occurrence_hash
+
+
 class CollectionGroupMember(models.Model):
     group = models.ForeignKey("CollectionGroup", on_delete=models.CASCADE)
     user = models.ForeignKey(
@@ -103,6 +111,7 @@ class CollectionLocation(models.Model):
         verbose_name=_('user')
     )
     needs_check = models.BooleanField(_('needs check'), default=False)
+    send_material = models.BooleanField(_('send material'), default=False)
     report = models.TextField(_('report'), blank=True)
 
     class Meta:
