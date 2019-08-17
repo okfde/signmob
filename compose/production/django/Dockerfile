@@ -50,4 +50,7 @@ USER django
 
 WORKDIR /app
 
+ARG gitcommithash
+ENV GIT_COMMIT=$gitcommithash
+
 ENTRYPOINT ["/entrypoint"]
