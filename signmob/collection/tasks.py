@@ -135,28 +135,29 @@ def message_event_created(event):
         )
         send_message(message, group=None)
 
-    if event.group:
-        subject = 'Team {name} hat eine neuen Sammeltermin: {date}'.format(
-            name=event.group.name,
-            date=formats.date_format(event.start, 'SHORT_DATE_FORMAT')
-        )
-        users = event.group.members.all()
-    else:
-        subject = 'Neuer Sammeltermin: {date}'.format(
-            date=formats.date_format(event.start, 'SHORT_DATE_FORMAT')
-        )
-        users = User.objects.all()
+    # # Don't send emails for newly created events anymore
+    # if event.group:
+    #     subject = 'Team {name} hat eine neuen Sammeltermin: {date}'.format(
+    #         name=event.group.name,
+    #         date=formats.date_format(event.start, 'SHORT_DATE_FORMAT')
+    #     )
+    #     users = event.group.members.all()
+    # else:
+    #     subject = 'Neuer Sammeltermin: {date}'.format(
+    #         date=formats.date_format(event.start, 'SHORT_DATE_FORMAT')
+    #     )
+    #     users = User.objects.all()
 
-    for user in users:
-        send_template_email(
-            user=user,
-            subject=subject,
-            template='collection/emails/event_created.txt',
-            context={
-                'user': user,
-                'event': event
-            }
-        )
+    # for user in users:
+    #     send_template_email(
+    #         user=user,
+    #         subject=subject,
+    #         template='collection/emails/event_created.txt',
+    #         context={
+    #             'user': user,
+    #             'event': event
+    #         }
+    #     )
 
 
 INTERVAL_HOURS = 1
@@ -178,14 +179,14 @@ def event_checker():
         announce_event_tomorrow(event)
 
     # ended in the last hour
-    start = now
-    end = start + timedelta(hours=INTERVAL_HOURS)
-    events = CollectionEvent.objects.filter(
-        event_occurence__end__gte=start,
-        event_occurence__end__lt=end,
-    )
-    for event in events:
-        send_event_ended(event)
+    # start = now
+    # end = start + timedelta(hours=INTERVAL_HOURS)
+    # events = CollectionEvent.objects.filter(
+    #     event_occurence__end__gte=start,
+    #     event_occurence__end__lt=end,
+    # )
+    # for event in events:
+    #     send_event_ended(event)
 
 
 def announce_event_tomorrow(event):
