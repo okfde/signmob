@@ -1,0 +1,11 @@
+{% extends "emails/base.txt" %}
+
+{% block body %}{% autoescape off %}Hallo {{ user.name }},
+
+leider hat {{ event_user.name }} für das Event „{{ event }}“ abgesagt.
+
+Hier geht's zum Event:
+
+{{ user.get_autologin_prefix }}{{ event.get_absolute_url }}
+
+{% endautoescape %}{% endblock %}

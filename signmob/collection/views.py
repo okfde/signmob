@@ -20,6 +20,7 @@ from .forms import (
     CollectionLocationReportForm,
     CollectionEventJoinForm
 )
+from .signals import event_left
 from .utils import get_period
 
 
@@ -222,5 +223,11 @@ def cancel_event_membership(request, pk):
 
     response = redirect(event_member.event)
     event_member.delete()
+
+    event_left.send(
+        sender=CollectionEventMember,
+        event=event_member.event,
+        user=request.user
+    )
 
     return response

@@ -4,14 +4,16 @@ from django.db import transaction
 
 from .signals import (
     group_joined, location_created, location_reported,
-    event_created, material_requested
+    event_created, material_requested,
+    event_joined, event_left
 )
 from .models import CollectionEvent
 from .tasks import (
     location_created_task, location_reported_task,
     group_joined_task,
     event_created_task,
-    material_requested_task
+    material_requested_task,
+    event_joined_task, event_left_task
 )
 
 
@@ -42,6 +44,16 @@ def notify_group_joined(sender, user, group, **kwargs):
 @receiver(event_created)
 def notify_event_created(sender, event, **kwargs):
     transaction.on_commit(lambda: event_created_task.delay(event.id))
+
+
+@receiver(event_joined)
+def notify_event_created(sender, event, user, **kwargs):
+    transaction.on_commit(lambda: event_joined_task.delay(event.id, user.id))
+
+
+@receiver(event_left)
+def notify_event_created(sender, event, user, **kwargs):
+    transaction.on_commit(lambda: event_left_task.delay(event.id, user.id))
 
 
 @receiver(material_requested)

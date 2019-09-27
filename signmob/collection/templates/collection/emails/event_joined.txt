@@ -1,0 +1,15 @@
+{% extends "emails/base.txt" %}
+
+{% block body %}{% autoescape off %}Hallo {{ user.name }},
+
+jemand nimmt an dem Event „{{ event }}“ teil:
+
+{{ event_user.name }}
+{{ event_user.email }}
+{{ event_user.mobile }}
+
+Hier geht's zum Event:
+
+{{ user.get_autologin_prefix }}{{ event.get_absolute_url }}
+
+{% endautoescape %}{% endblock %}

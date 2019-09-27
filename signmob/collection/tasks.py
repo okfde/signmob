@@ -254,3 +254,60 @@ def send_event_ended(event):
                 'event': event
             }
         )
+
+
+@celery_app.task
+def event_joined_task(event_id, user_id):
+    event_membership_notification(event_id, user_id, joined=True)
+
+
+@celery_app.task
+def event_left_task(event_id, user_id):
+    event_membership_notification(event_id, user_id, joined=False)
+
+
+def event_membership_notification(event_id, user_id, joined=True):
+    try:
+        event = CollectionEvent.objects.get(id=event_id)
+    except CollectionGroup.DoesNotExist:
+        return
+    try:
+        event_user = CollectionEvent.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return
+
+    notify_users = User.objects.filter(
+        groups__name='Teilnahmebenachrichtigungen'
+    )
+
+    for user in notify_users:
+        if joined:
+            notify_event_joined(user, event, event_user)
+        else:
+            notify_event_left(user, event, event_user)
+
+
+def notify_event_joined(user, event, event_user):
+    send_template_email(
+        user=user,
+        subject='Neue Terminteilnahme bei {}'.format(event),
+        template='collection/emails/event_joined.txt',
+        context={
+            'user': user,
+            'event_user': event_user,
+            'event': event
+        }
+    )
+
+
+def notify_event_left(user, event, event_user):
+    send_template_email(
+        user=user,
+        subject='Absage bei Termin {}'.format(event),
+        template='collection/emails/event_left.txt',
+        context={
+            'user': user,
+            'event_user': event_user,
+            'event': event
+        }
+    )

@@ -15,7 +15,8 @@ from .models import (
 )
 from .signals import (
     group_joined, location_created, location_reported,
-    material_requested
+    material_requested,
+    event_joined,
 )
 
 
@@ -212,5 +213,10 @@ class CollectionEventJoinForm(forms.Form):
             start=start_date,
             end=end_date,
             note=self.cleaned_data['note'],
+        )
+        event_joined.send(
+            sender=CollectionEventMember,
+            event=self.event,
+            user=user
         )
         return event_member
