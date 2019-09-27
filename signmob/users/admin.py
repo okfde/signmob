@@ -33,7 +33,11 @@ class UserAdmin(SendMailMixin, auth_admin.UserAdmin):
                 )
             },
         ),
-        ("Important dates", {"fields": ("last_login", "date_joined")}),
+        ("Important dates", {"fields": (
+            "last_login", "date_joined",
+            "date_left", "is_deleted"
+        )}),
+        ("Profile", {"fields": ("mobile", "geo")}),
     ]
 
     actions = ['send_mail']
