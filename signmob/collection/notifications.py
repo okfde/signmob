@@ -47,12 +47,12 @@ def notify_event_created(sender, event, **kwargs):
 
 
 @receiver(event_joined)
-def notify_event_created(sender, event, user, **kwargs):
+def notify_event_joined(sender, event, user, **kwargs):
     transaction.on_commit(lambda: event_joined_task.delay(event.id, user.id))
 
 
 @receiver(event_left)
-def notify_event_created(sender, event, user, **kwargs):
+def notify_event_left(sender, event, user, **kwargs):
     transaction.on_commit(lambda: event_left_task.delay(event.id, user.id))
 
 

@@ -272,7 +272,7 @@ def event_membership_notification(event_id, user_id, joined=True):
     except CollectionGroup.DoesNotExist:
         return
     try:
-        event_user = CollectionEvent.objects.get(id=user_id)
+        event_user = User.objects.get(id=user_id)
     except User.DoesNotExist:
         return
 
@@ -281,6 +281,8 @@ def event_membership_notification(event_id, user_id, joined=True):
     )
 
     for user in notify_users:
+        if user == event_user:
+            continue
         if joined:
             notify_event_joined(user, event, event_user)
         else:
