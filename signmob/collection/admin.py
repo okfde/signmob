@@ -208,7 +208,7 @@ admin.site.register(Event, CustomEventAdmin)
 
 
 class CustomOccurrenceAdmin(admin.ModelAdmin):
-    readonly_fields = ('original_start', 'original_end')
+    pass
 
 
 admin.site.unregister(Occurrence)
